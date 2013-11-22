@@ -1,0 +1,28 @@
+Name: harbour-taivaanvahti
+Summary: Taivaanvahti
+Version: 1.0
+Release: 1
+Group: Qt/Qt
+License: LICENSE
+Sources:
+- '%{name}-%{version}.tar.bz2'
+Description: "SailfishOS-sovellus Ursan Taivaanvahti-havaintoj\xE4rjestelm\xE4\xE4n\n"
+Configure: none
+Builder: qtc5
+PkgConfigBR:
+- sailfishapp
+- Qt5Quick
+- Qt5Qml
+- Qt5Core
+Requires:
+- sailfishsilica-qt5
+Files:
+- /usr/share/harbour-taivaanvahti
+- '%{_bindir}'
+- '%{_datadir}/%{name}/qml'
+- '%{_datadir}/applications/%{name}.desktop'
+- '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
+- /usr/bin
+- /usr/share/applications
+- /usr/share/icons/hicolor/86x86/apps
+PkgBR: []

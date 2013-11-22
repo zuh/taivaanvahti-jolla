@@ -1,0 +1,45 @@
+A client to Ursa's Taivaanvahti observation database for Jolla's SailfishOS
+
+Description in Jolla Store (ie. the sales pitch)
+=================================================
+
+FI: Taivaanvahti on Ursan havaintojärjestelmä, jonka tietokantaan kerätään 
+tähtitieteellisten ja ilmakehän ilmiöiden havaintoja. Tällä 
+sovelluksella voit selata Taivaanvahtiin syötettyjä havaintoja ja pysyt 
+kartalla siitä mitä avaruudessa ja Suomen taivaalla tapahtuu.
+
+EN: Taivaanvahti is a sky observation database maintained by Ursa. With this 
+application you can browse the observations in Taivaanvahti's database 
+and keep up-to-date with heavenly happenings in deep space and around 
+Finland.
+
+NOTE: English translation will be included later
+NOTE: Most of the observations are in Finnish
+
+Build
+======
+
+Load the project in QtCreator (SailfishOS version used, others might 
+work) and build it there.
+
+The usual qmake routine of
+
+ qmake && make && make install
+ 
+should also work.
+
+Install
+========
+
+Prefer to install the tested relases from Jolla Store.
+
+To build a package your self, use the mb or mb2 tools within a SailfishOS
+or Mer SDK. Details of that are left as an exercise for now.
+
+Once you have a package, just get it on the device through ssh / bluetooth
+and run
+
+ pkcon install-local harbour-taivaanvahti*.rpm
+
+You might need to be in developer mode for that to work.
+
