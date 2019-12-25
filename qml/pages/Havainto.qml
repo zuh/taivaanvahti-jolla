@@ -30,7 +30,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-
 Page {
     id: page
 
@@ -42,11 +41,11 @@ Page {
         anchors.fill: parent
 
         contentHeight: header.height + col.height + Theme.paddingLarge
-
         ScrollDecorator { flickable: flick }
 
         PageHeader {
             id: header
+
             title: {
                 if (busy.running)
                     return ""
@@ -77,14 +76,14 @@ Page {
 
                 Label {
                     width: parent.width
-                    elide: Text.ElideRight
+                    elide: Text.ElideLeft
                     text: taivas.havainnot.get(taivas.havainto).title || ""
                 }
 
                 Label {
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.secondaryColor
-                    text: taivas.havainnot.get(taivas.havainto).user || ""
+                    text: taivas.userName || ""
                 }
 
                 Label {
@@ -109,12 +108,12 @@ Page {
 
 
             Label {
-                anchors.right: parent.right
+                anchors.left: parent.left
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: {
-                    if (taivas.havainnot.get(taivas.havainto).details != "")
+                    if (taivas.havainnot.get(taivas.havainto).details !== "")
                         return "Lisätiedot"
                     else
                         return ""
@@ -144,7 +143,7 @@ Page {
             }
 
             Row {
-                layoutDirection: Qt.RightToLeft
+                layoutDirection: Qt.LeftToRight
                 width: parent.width
                 spacing: Theme.paddingLarge
 
@@ -153,11 +152,13 @@ Page {
                     spacing: Theme.paddingSmall
 
                     Label {
+                        anchors.left: parent.left
                         width: parent.width
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.highlightColor
                         font.family: Theme.fontFamilyHeading
-                        horizontalAlignment: Text.AlignRight
+                        horizontalAlignment: Text.AlignLeft
+
                         text: {
                             if (taivas.havainnot.get(taivas.havainto).thumbs && taivas.havainnot.get(taivas.havainto).thumbs.count)
                                 return "Kuvat (" + taivas.havainnot.get(taivas.havainto).thumbs.count + ")"
@@ -166,12 +167,13 @@ Page {
                         }
                     }
                     Label {
+                        anchors.left: parent.left
                         font.pixelSize: Theme.fontSizeTiny
                         color: Theme.highlightColor
                         font.family: Theme.fontFamilyHeading
                         text: {
                             if (taivas.havainnot.get(taivas.havainto).thumbs && taivas.havainnot.get(taivas.havainto).thumbs.count)
-                                return "© 2013 " + taivas.havainnot.get(taivas.havainto).user
+                                return "© 2019 " + taivas.userName
                             else
                                 return ""
                         }
@@ -190,7 +192,7 @@ Page {
                     id: photoRepeater
                     model: taivas.havainnot.get(taivas.havainto).thumbs
                     onModelChanged: {
-                        if (model.count > 0 && model.count != photos.loaded)
+                        if (model.count > 0 && model.count !== photos.loaded)
                             busyTail.running = true
                     }
 
@@ -229,12 +231,12 @@ Page {
             }
 
             Label {
-                anchors.right: parent.right
+                anchors.left: parent.left
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: {
-                    if (taivas.havainnot.get(taivas.havainto).equipment != "")
+                    if (taivas.havainnot.get(taivas.havainto).equipment !== "")
                         return "Tekniset tiedot"
                     else
                         return ""
@@ -249,7 +251,7 @@ Page {
             }
 
             Label {
-                anchors.right: parent.right
+                anchors.left: parent.left
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
@@ -301,11 +303,11 @@ Page {
                 spacing: Theme.paddingSmall
 
                 Label {
-                    anchors.right: parent.right
+                    anchors.left: parent.left
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.highlightColor
                     font.family: Theme.fontFamilyHeading
-                    horizontalAlignment: Text.AlignRight
+                    horizontalAlignment: Text.AlignLeft
                     text: "Havainto taivaanvahdissa"
                 }
 

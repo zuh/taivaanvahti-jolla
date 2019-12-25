@@ -133,24 +133,46 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
-                text: "Kehittäjät"
+                text: "Alkuperäinen kehittäjä"
             }
 
             BackgroundItem {
-                id: kalle
+                id: orgdev
                 height: Theme.itemSizeSmall
-                property string name: "Kalle Vahlman"
-                property string mail: "zuh@iki.fi"
-                property string url: "mailto:" + mail
+                property string original: "Kalle Vahlman"
+                property string originalmail: "zuh@iki.fi"
+                property string originalurl: "mailto:" + mail
 
                 Label {
                     anchors.centerIn: parent
                     font.pixelSize: Theme.fontSizeSmall
-                    text: kalle.name + " <" + kalle.mail + ">"
+                    text: orgdev.original + " <" + orgdev.originalmail + ">"
                 }
 
-                onClicked: Qt.openUrlExternally(url)
+                onClicked: Qt.openUrlExternally(originalurl)
             }
+
+            Label {
+                anchors.right: parent.right
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                font.family: Theme.fontFamilyHeading
+                text: "Nykyinen kehittäjä"
+            }
+
+            BackgroundItem {
+                id: dev
+                height: Theme.itemSizeSmall
+                property string developer: "Santeri Kangas"
+
+                Label {
+                    anchors.centerIn: parent
+                    font.pixelSize: Theme.fontSizeSmall
+                    text: dev.developer
+                }
+
+            }
+
         }
     }
 }

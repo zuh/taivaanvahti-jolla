@@ -140,7 +140,7 @@ Page {
         font.family: Theme.fontFamilyHeading
         text: {
             if (taivas.havainnot.get(taivas.havainto).thumbs && taivas.havainnot.get(taivas.havainto).thumbs.count)
-                return "© 2013 " + taivas.havainnot.get(taivas.havainto).user
+                return "© 2019 " + taivas.userName
             else
                 return ""
         }

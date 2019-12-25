@@ -48,13 +48,13 @@ Page {
             busy: taivas.searchRunning
 
             MenuItem {
-                text: "Hakuehdot"
-                onClicked: pageStack.push("Haku.qml")
+                text: "Tietoja"
+                onClicked: pageStack.push("Tietoja.qml")
             }
 
             MenuItem {
-                text: "Tietoja"
-                onClicked: pageStack.push("Tietoja.qml")
+                text: "Hakuehdot"
+                onClicked: pageStack.push("Haku.qml")
             }
 
             MenuItem {
@@ -68,6 +68,7 @@ Page {
         }
 
         header: PageHeader {
+            id: header
             title: "Havainnot"
         }
 
@@ -103,29 +104,17 @@ Page {
                     elide: Text.ElideRight
                     width: parent.width
                 }
-                Label {
+
+                /* Crashes on here Label {
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor
                     text: {
-                        var ret = ""
-                        if (!taivas.havainnot.get(index))
-                            return ret;
-
-                        if (taivas.havainnot.get(index).thumbs && taivas.havainnot.get(index).thumbs.count)
-                            if (taivas.havainnot.get(index).thumbs.count == 1)
-                                ret += taivas.havainnot.get(index).thumbs.count + " kuva "
-                            else
-                                ret += taivas.havainnot.get(index).thumbs.count + " kuvaa "
-
-                        if (taivas.havainnot.get(index).comments && taivas.havainnot.get(index).comments != "0")
-                            if (taivas.havainnot.get(index).comments == "1")
-                                ret += taivas.havainnot.get(index).comments + " kommentti"
-                            else
-                                ret += taivas.havainnot.get(index).comments + " kommenttia"
-
-                        return ret
+                        if (index <= taivas.havainnot.count)
+                            return taivas.detailInfo(index)
+                        else
+                            return "Ei kuvia tai kommentteja"
                     }
-                }
+                } */
             }
 
             onClicked: {

@@ -45,11 +45,13 @@ ApplicationWindow
     property bool searchRunning: false
     property bool detailedSearchRunning: false
     property bool commentSearchRunning: false
+
+    property string userName: ""
     property string searchUser: ""
-    property string searchUrl: "http://www.ursa.fi/~obsbase/search_3.php?format=json"
+    property string searchUrl: "https://www.taivaanvahti.fi/app/api/search.php?format=json"
     property string defaultColumns: "&columns=id,title,start,city,category,thumbnails,comments"
     property string detailedColumns: "&columns=user,team,description,details,link,equipment,images"
-    property string commentUrl: "http://www.ursa.fi/~obsbase/comment_search.php?format=json&order=asc"
+    property string commentUrl: "https://www.taivaanvahti.fi/app/api/comment_search.php?format=json"
     property int dateOffset: 5
     property var startDate: makeOffsetDate()
     property var endDate: new Date()
@@ -68,6 +70,34 @@ ApplicationWindow
         "muu": false
     }
 
+    function reset() {
+        havainnot.clear()
+        kommentit.clear()
+        viimeiset.clear()
+
+        taivas.havaitse()
+    }
+
+    function detailInfo(index) {
+        var ret = ""
+
+        if (taivas.havainnot.get(index).thumbs && taivas.havainnot.get(index).thumbs.count)
+
+            if (taivas.havainnot.get(index).thumbs.count === 1)
+                ret += taivas.havainnot.get(index).thumbs.count + " kuva "
+            else
+                ret += taivas.havainnot.get(index).thumbs.count + " kuvaa "
+
+        if (taivas.havainnot.get(index).comments && taivas.havainnot.get(index).comments !== "0")
+
+            if (taivas.havainnot.get(index).comments === "1")
+                ret += taivas.havainnot.get(index).comments + " kommentti"
+            else
+                ret += taivas.havainnot.get(index).comments + " kommenttia"
+
+        return ret
+    }
+
     function makeOffsetDate() {
         var d = new Date();
         d.setDate(d.getDate() - dateOffset)
@@ -79,19 +109,25 @@ ApplicationWindow
         var xhr = new XMLHttpRequest
         var query = searchUrl + searchUser + detailedColumns + "&id=" + havainnot.get(havainto).id
         xhr.open("GET", query);
+
         xhr.onreadystatechange = function() {
-            if (xhr.readyState == XMLHttpRequest.DONE) {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                userName = ""
                 detailedSearchRunning = false
-                if (xhr.responseText.match("^No") != null)
+                if (xhr.responseText.match("^No") !== null)
                     return
                 var results = JSON.parse(xhr.responseText)
+
+                userName = results.observation[0].user[0]
+
                 if (results.observation[0].images) {
-                    var photos = results.observation[0].images.split(',')
+                    var photos = results.observation[0].images
                     results.observation[0].photos = []
                     for (var p in photos) {
                         results.observation[0].photos[p] = { "url" : photos[p] }
                     }
                 }
+
                 havainnot.set(havainto, results.observation[0])
             } // TODO: handle errors
         }
@@ -100,22 +136,23 @@ ApplicationWindow
 
     function havaitse() {
         searchRunning = true
+        havainnot.clear()
+        viimeiset.clear()
         var xhr = new XMLHttpRequest
         var query = searchUrl + searchUser + defaultColumns
-        query += "&start=" + Qt.formatDate(startDate, "yyyy-MM-dd")
-        query += "&end=" + Qt.formatDate(endDate, "yyyy-MM-dd")
+        query += "&created_start=" + Qt.formatDate(startDate, "yyyy-MM-dd")
+        query += "&created_end=" + Qt.formatDate(endDate, "yyyy-MM-dd")
         xhr.open("GET", query);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
-                havainnot.clear()
-                viimeiset.clear()
+
                 searchRunning = false
-                if (xhr.responseText.match("^No") != null)
+                if (xhr.responseText.match("^No") !== null)
                     return
                 var results = JSON.parse(xhr.responseText)
                 for (var i in results.observation) {
                     if (results.observation[i].thumbnails) {
-                        var thumbs = results.observation[i].thumbnails.split(',')
+                        var thumbs = results.observation[i].thumbnails
                         results.observation[i].thumbs = []
                         for (var p in thumbs) {
                             results.observation[i].thumbs[p] = { "url" : thumbs[p] }
@@ -123,6 +160,7 @@ ApplicationWindow
                     }
                     havainnot.append(results.observation[i])
                 }
+
                 if (havainnot.count > 0)
                     viimeiset.append({
                                          "category": havainnot.get(0).category,
@@ -148,7 +186,7 @@ ApplicationWindow
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 commentSearchRunning = false
-                if (xhr.responseText.match("^No") != null)
+                if (xhr.responseText.match("^No") !== null)
                     return
                 var results = JSON.parse(xhr.responseText)
                 for (var i in results.comment) {

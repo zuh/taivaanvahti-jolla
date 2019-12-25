@@ -1,0 +1,11 @@
+Taivaanvahti x.x
+
+- Korjattu yhteensopivaksi Sailfish 3.2 kanssa
+	* Havainnot näkyvät taas
+	* Havaintojen hakuaikaa voi muuttaa
+	* Kommentit ja kuvat poistettu listanäkymästä, sillä alkuperäinen toteutus kaatoi sovelluksen, 
+	  jos elementtejä oli paljon
+
+- Tyylimuutokset 
+	* Pulley Menun järjestys selkeämpi, ensiksi hakuihin liittyvät asiat ja sitten Tietoa-osio
+	* Tekniset tiedot ja kuvakenttä otsikot on asetettu vasempaan reunaan

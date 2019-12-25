@@ -96,6 +96,7 @@ Page {
                             page.dialogRunning = false
                             if (dialog.date < end.date)
                                 taivas.startDate = dialog.date
+                            taivas.reset()
                         })
                     }
                 }
@@ -115,6 +116,7 @@ Page {
                             page.dialogRunning = false
                             if (dialog.date > start.date)
                                 taivas.endDate = dialog.date
+                            taivas.reset()
                         })
                     }
                 }
@@ -243,7 +245,7 @@ Page {
                 id: title
                 width: parent.width
                 focus: false
-                placeholderText: "Mikä vain"
+                placeholderText: "Mikä Tahansa"
             }
 
         }
