@@ -84,7 +84,7 @@ ApplicationWindow
 
         if (taivas.havainnot.get(index).thumbs && taivas.havainnot.get(index).thumbs.count)
 
-            if (taivas.havainnot.get(index).thumbs.count === 1)
+            if (taivas.havainnot.get(index).thumbs.count === "1")
                 ret += taivas.havainnot.get(index).thumbs.count + " kuva "
             else
                 ret += taivas.havainnot.get(index).thumbs.count + " kuvaa "

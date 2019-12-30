@@ -43,7 +43,7 @@ Page {
 
         PageHeader {
             id: header
-            title: "Taivaanvahti"
+            title: "Taivaanvahti sovelluksesta"
         }
 
         Column {
@@ -89,7 +89,7 @@ Page {
             }
 
             Label {
-                anchors.right: parent.right
+                anchors.left: parent.left
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
@@ -107,7 +107,7 @@ Page {
             }
 
             Label {
-                anchors.right: parent.right
+                anchors.left: parent.left
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
@@ -129,7 +129,7 @@ Page {
             }
 
             Label {
-                anchors.right: parent.right
+                anchors.left: parent.left
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
@@ -153,7 +153,7 @@ Page {
             }
 
             Label {
-                anchors.right: parent.right
+                anchors.left: parent.left
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading

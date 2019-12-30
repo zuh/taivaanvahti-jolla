@@ -105,17 +105,14 @@ Page {
                     width: parent.width
                 }
 
-                /* Crashes on here for some reason
+               // Crashes on here for some reason
                 Label {
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor
                     text: {
-                        if (index <= taivas.havainnot.count)
-                            return taivas.detailInfo(index)
-                        else
-                            return "Ei kuvia tai kommentteja"
+                        return taivas.detailInfo(index)
                     }
-                } */
+                }
             }
 
             onClicked: {
