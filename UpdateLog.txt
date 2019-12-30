@@ -5,6 +5,7 @@ Taivaanvahti x.x
 	* Havaintojen hakuaikaa voi muuttaa
 	* Kommentit ja kuvat poistettu listanäkymästä, sillä alkuperäinen toteutus kaatoi sovelluksen, 
 	  jos elementtejä oli paljon
+	* Korjattu oletushaun palautus
 
 - Tyylimuutokset 
 	* Pulley Menun järjestys selkeämpi, ensiksi hakuihin liittyvät asiat ja sitten Tietoa-osio

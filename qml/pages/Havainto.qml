@@ -27,7 +27,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
@@ -173,7 +173,7 @@ Page {
                         font.family: Theme.fontFamilyHeading
                         text: {
                             if (taivas.havainnot.get(taivas.havainto).thumbs && taivas.havainnot.get(taivas.havainto).thumbs.count)
-                                return "© 2019 " + taivas.userName
+                                return taivas.copyright + taivas.userName
                             else
                                 return ""
                         }
@@ -315,7 +315,8 @@ Page {
                     height: Theme.itemSizeSmall
 
                     Label {
-                        anchors.centerIn: parent
+                        anchors.top: parent.top
+                        anchors.left: parent.left
                         font.pixelSize: Theme.fontSizeTiny
                         text: taivas.havainnot.get(taivas.havainto).link || ""
                     }

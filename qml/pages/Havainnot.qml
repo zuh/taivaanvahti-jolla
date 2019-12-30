@@ -27,7 +27,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 
@@ -105,7 +105,8 @@ Page {
                     width: parent.width
                 }
 
-                /* Crashes on here Label {
+                /* Crashes on here for some reason
+                Label {
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor
                     text: {

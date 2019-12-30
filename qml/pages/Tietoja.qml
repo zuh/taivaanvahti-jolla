@@ -27,7 +27,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
@@ -117,7 +117,7 @@ Page {
             BackgroundItem {
                 id: homepage
                 height: Theme.itemSizeSmall
-                property string url: "https://github.com/zuh/taivaanvahti-jolla"
+                property string url: "Repositorion uusi linkki / kehitysalusta tulossa..."
 
                 Label {
                     anchors.centerIn: parent
@@ -141,7 +141,7 @@ Page {
                 height: Theme.itemSizeSmall
                 property string original: "Kalle Vahlman"
                 property string originalmail: "zuh@iki.fi"
-                property string originalurl: "mailto:" + mail
+                property string originalurl: "mailto:" + originalmail
 
                 Label {
                     anchors.centerIn: parent

@@ -27,7 +27,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
@@ -66,6 +66,8 @@ Page {
                     all.checked = true
                     end.date = new Date()
                     start.date = taivas.makeOffsetDate()
+
+                    taivas.reset()
                 }
             }
 
@@ -286,8 +288,8 @@ Page {
 
         taivas.searchObserver = observer.text
         taivas.searchTitle = title.text
-//        taivas.startDate = start.date
-//        taivas.endDate = end.date
+        taivas.startDate = start.date
+        taivas.endDate = end.date
 
         taivas.havaitse()
 

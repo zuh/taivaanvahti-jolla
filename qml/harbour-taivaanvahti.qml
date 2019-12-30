@@ -27,7 +27,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "pages"
 
@@ -47,6 +47,7 @@ ApplicationWindow
     property bool commentSearchRunning: false
 
     property string userName: ""
+    property string copyright: "© 2019 "
     property string searchUser: ""
     property string searchUrl: "https://www.taivaanvahti.fi/app/api/search.php?format=json"
     property string defaultColumns: "&columns=id,title,start,city,category,thumbnails,comments"
@@ -140,8 +141,8 @@ ApplicationWindow
         viimeiset.clear()
         var xhr = new XMLHttpRequest
         var query = searchUrl + searchUser + defaultColumns
-        query += "&created_start=" + Qt.formatDate(startDate, "yyyy-MM-dd")
-        query += "&created_end=" + Qt.formatDate(endDate, "yyyy-MM-dd")
+        query += "&start=" + Qt.formatDate(startDate, "yyyy-MM-dd")
+        query += "&end=" + Qt.formatDate(endDate, "yyyy-MM-dd")
         xhr.open("GET", query);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
