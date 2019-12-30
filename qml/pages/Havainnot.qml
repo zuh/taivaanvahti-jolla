@@ -105,15 +105,35 @@ Page {
                     width: parent.width
                 }
 
-               // Crashes on here for some reason
                 Label {
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor
                     text: {
-                        return taivas.detailInfo(index)
+                        var total = ""
+
+                        if (thumbnails.count === 0 && comments == "0") {
+                            return "Ei kuvia / kommentteja"
+                        } else {
+                            if (thumbnails.count !== 0) {
+                                if (thumbnails.count > 1) {
+                                    total += thumbnails.count + " kuvaa "
+                                } else {
+                                    total += thumbnails.count + " kuva "
+                                }
+                            }
+
+                            if (comments !== "0") {
+                                if (comments === "1") {
+                                    total += comments + " kommentti "
+                                } else {
+                                    total += comments + " kommenttia "
+                                }
+                            }
+                        return total
                     }
                 }
             }
+        }
 
             onClicked: {
                 taivas.havainto = index

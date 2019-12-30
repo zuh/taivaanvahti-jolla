@@ -3,8 +3,7 @@ Taivaanvahti x.x
 - Korjattu yhteensopivaksi Sailfish 3.2 kanssa
 	* Havainnot näkyvät taas
 	* Havaintojen hakuaikaa voi muuttaa
-	* Kommentit ja kuvat poistettu listanäkymästä, sillä alkuperäinen toteutus kaatoi sovelluksen, 
-	  jos elementtejä oli paljon
+	* Korjattu kommentti ja kuvamäärien aiheuttama kaatuminen havaintonäkymässä (model delegate)
 	* Korjattu oletushaun palautus
 
 - Tyylimuutokset 

@@ -79,26 +79,6 @@ ApplicationWindow
         taivas.havaitse()
     }
 
-    function detailInfo(index) {
-        var ret = ""
-
-        if (taivas.havainnot.get(index).thumbs && taivas.havainnot.get(index).thumbs.count)
-
-            if (taivas.havainnot.get(index).thumbs.count === "1")
-                ret += taivas.havainnot.get(index).thumbs.count + " kuva "
-            else
-                ret += taivas.havainnot.get(index).thumbs.count + " kuvaa "
-
-        if (taivas.havainnot.get(index).comments && taivas.havainnot.get(index).comments !== "0")
-
-            if (taivas.havainnot.get(index).comments === "1")
-                ret += taivas.havainnot.get(index).comments + " kommentti"
-            else
-                ret += taivas.havainnot.get(index).comments + " kommenttia"
-
-        return ret
-    }
-
     function makeOffsetDate() {
         var d = new Date();
         d.setDate(d.getDate() - dateOffset)
