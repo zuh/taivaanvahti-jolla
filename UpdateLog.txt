@@ -10,3 +10,4 @@ Taivaanvahti x.x
 	* Pulley Menun järjestys selkeämpi, ensiksi hakuihin liittyvät asiat ja sitten Tietoa-osio
 	* Tekniset tiedot ja kuvakenttä otsikot on asetettu vasempaan reunaan
 	* Yläotsikkokentät pidetty yhä vasemmassa reunassa
+	* Cover-sivulla näkyy nyt kategorian sijaan havainnon otsikko

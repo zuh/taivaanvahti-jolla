@@ -41,7 +41,7 @@ CoverBackground {
         spacing: Theme.paddingLarge
 
         Label {
-            text: "Viimeisimmät"
+            text: "Viimeisimmät havainnot"
             font.pixelSize: Theme.fontSizeTiny
         }
 

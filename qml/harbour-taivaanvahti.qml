@@ -144,12 +144,12 @@ ApplicationWindow
 
                 if (havainnot.count > 0)
                     viimeiset.append({
-                                         "category": havainnot.get(0).category,
+                                         "category": havainnot.get(0).title,
                                          "start": havainnot.get(0).start
                                      })
                 if (havainnot.count > 1)
                     viimeiset.append({
-                                         "category": havainnot.get(1).category,
+                                         "category": havainnot.get(1).title,
                                          "start": havainnot.get(1).start
                                      })
             } // TODO: handle errors
