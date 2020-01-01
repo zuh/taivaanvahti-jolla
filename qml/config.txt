@@ -1,0 +1,10 @@
+all=false
+tahtikuva=false
+komeetta=true
+pimennys=false
+tulipallo=false
+revontuli=false
+yopilvi=false
+myrsky=false
+halo=false
+muu=true

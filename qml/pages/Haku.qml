@@ -278,7 +278,11 @@ Page {
                 taivas.searchCategories[child.category] = child.checked
                 if (child.checked)
                     taivas.searchUser += "&category=" + child.category
+                    taivas.configurequery = ""
+                    taivas.setConfigureStatus(child.category, true);
             }
+
+            taivas.writeStatus()
         }
 
         if (observer.text)

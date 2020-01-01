@@ -30,10 +30,16 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "pages"
+import Configuration 1.0
 
 ApplicationWindow
 {
     id: taivas
+
+    ConfigReader {
+        id: config
+    }
+
     initialPage: Qt.createComponent("pages/Havainnot.qml")
     cover: Qt.createComponent("cover/CoverPage.qml")
 
@@ -42,12 +48,14 @@ ApplicationWindow
     property var kommentit: ListModel {}
     property var viimeiset: ListModel {}
 
+    property bool configured: false
     property bool searchRunning: false
     property bool detailedSearchRunning: false
     property bool commentSearchRunning: false
 
+    property string configurequery: ""
     property string userName: ""
-    property string copyright: "© 2019 "
+    property string copyright: "© 2020 "
     property string searchUser: ""
     property string searchUrl: "https://www.taivaanvahti.fi/app/api/search.php?format=json"
     property string defaultColumns: "&columns=id,title,start,city,category,thumbnails,comments"
@@ -71,10 +79,43 @@ ApplicationWindow
         "muu": false
     }
 
+    function writeStatus() {
+        config.writeStatus()
+    }
+
+    function setConfigureStatus(object, status) {
+        config.setStatus(object,status)
+    }
+
     function reset() {
         havainnot.clear()
         kommentit.clear()
         viimeiset.clear()
+
+        taivas.havaitse()
+    }
+
+    function configure() {
+        // Application launch configuration
+
+        if (config.readStatus() ) {
+            for (var p in searchCategories) {
+                searchCategories[p] = config.fetchStatus(p)
+            }
+
+            for (var i in searchCategories) {
+                if (searchCategories[i]) {
+                    configurequery += "&category=" + i
+                }
+            }
+        } else {
+            for (var object in searchCategories) {
+                // Set the current default state for QMap
+                config.setStatus(object,searchCategories[object]);
+            }
+
+            config.writeStatus();
+        }
 
         taivas.havaitse()
     }
@@ -120,7 +161,8 @@ ApplicationWindow
         havainnot.clear()
         viimeiset.clear()
         var xhr = new XMLHttpRequest
-        var query = searchUrl + searchUser + defaultColumns
+        var query = searchUrl + configurequery + searchUser + defaultColumns
+
         query += "&start=" + Qt.formatDate(startDate, "yyyy-MM-dd")
         query += "&end=" + Qt.formatDate(endDate, "yyyy-MM-dd")
         xhr.open("GET", query);
@@ -139,17 +181,18 @@ ApplicationWindow
                             results.observation[i].thumbs[p] = { "url" : thumbs[p] }
                         }
                     }
+
                     havainnot.append(results.observation[i])
                 }
 
                 if (havainnot.count > 0)
                     viimeiset.append({
-                                         "category": havainnot.get(0).title,
+                                         "category": havainnot.get(0).title, // instead title
                                          "start": havainnot.get(0).start
                                      })
                 if (havainnot.count > 1)
                     viimeiset.append({
-                                         "category": havainnot.get(1).title,
+                                         "category": havainnot.get(1).title, // instead title
                                          "start": havainnot.get(1).start
                                      })
             } // TODO: handle errors

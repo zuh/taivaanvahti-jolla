@@ -33,6 +33,7 @@
 #endif
 
 #include <sailfishapp.h>
+#include <config.h>
 
 
 int main(int argc, char *argv[])
@@ -45,6 +46,8 @@ int main(int argc, char *argv[])
     //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
     //
     // To display the view, call "show()" (will show fullscreen on device).
+
+    qmlRegisterType<Config>("Configuration",1,0,"ConfigReader");
 
     return SailfishApp::main(argc, argv);
 }

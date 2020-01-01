@@ -117,7 +117,7 @@ Page {
             BackgroundItem {
                 id: homepage
                 height: Theme.itemSizeSmall
-                property string url: "Repositorion uusi linkki / kehitysalusta tulossa..."
+                property string url: "https://github.com/Moppa5/taivaanvahti-jolla"
 
                 Label {
                     anchors.centerIn: parent

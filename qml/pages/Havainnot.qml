@@ -34,7 +34,7 @@ import Sailfish.Silica 1.0
 Page {
     id: havainnotPage
 
-    Component.onCompleted: taivas.havaitse()
+    Component.onCompleted: taivas.configure()
 
     SilicaListView {
         id: list
