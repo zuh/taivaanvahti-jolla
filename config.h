@@ -45,9 +45,8 @@ public slots:
 
 private:
     QMap<QString, bool> stateBank_;
-
-    const QString dataFile_ = "$XDG_CONFIG_HOME/harbour-taivaanvahti/config.txt";
-
+    const QString dataFile_ = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
+            + "/harbour-taivaanvahti/" + "config.txt";
 };
 
 #endif // CONFIG_H

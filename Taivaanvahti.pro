@@ -25,7 +25,9 @@ OTHER_FILES += \
     qml/harbour-taivaanvahti.qml \
     harbour-taivaanvahti.desktop \
     harbour-taivaanvahti.png \
-    qml/config.txt
+    config.txt
 
 HEADERS += \
     config.h
+
+RESOURCES +=

@@ -99,16 +99,19 @@ ApplicationWindow
         // Application launch configuration
 
         if (config.readStatus() ) {
+            // Update searchCategories from file
             for (var p in searchCategories) {
                 searchCategories[p] = config.fetchStatus(p)
             }
 
+            // Update categories for query
             for (var i in searchCategories) {
                 if (searchCategories[i]) {
                     configurequery += "&category=" + i
                 }
             }
         } else {
+            // No data file yet
             for (var object in searchCategories) {
                 // Set the current default state for QMap
                 config.setStatus(object,searchCategories[object]);

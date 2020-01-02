@@ -7,11 +7,15 @@ Config::Config(QObject *parent) : QObject(parent)
 
 void Config::writeStatus()
 {
-    QFile file(dataFile_);
+    QString datadir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    QDir dir(datadir);
+    dir.mkpath("harbour-taivaanvahti");
+    QString path = datadir + "/" + "harbour-taivaanvahti" + "/" + "config.txt";
+
+    QFile file(path);
 
     if (file.exists()) {
-        // File is there already => clear the file
-        file.remove();
+        qDebug() << "File exists";
     }
 
     file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -26,14 +30,14 @@ void Config::writeStatus()
     QMap<QString, bool>::iterator object;
 
     for (object = stateBank_.begin(); object != stateBank_.end(); object++) {
-
         QString state = "";
 
-        if (object.value()) {
+        if (object.value() == true) {
             state = "true";
         } else {
             state = "false";
         }
+
         outStream << object.key() << "=" << state << "\n";
     }
 
@@ -42,7 +46,16 @@ void Config::writeStatus()
 
 bool Config::readStatus()
 {
-    QFile file(dataFile_);
+    QString datadir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    QDir dir(datadir);
+    dir.mkpath("harbour-taivaanvahti");
+    QString path = datadir + "/" + "harbour-taivaanvahti" + "/" + "config.txt";
+
+    QFile file(path);
+
+    if (!file.exists()) {
+        return false;
+    }
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
             return false;

@@ -67,6 +67,15 @@ Page {
                     end.date = new Date()
                     start.date = taivas.makeOffsetDate()
 
+                    for (var p in taivas.searchCategories) {
+                        if (p !== "all") {
+                            taivas.searchCategories[p] = false
+                            taivas.setConfigureStatus(p,false);
+                        }
+                    }
+                    taivas.setConfigureStatus("all",true)
+
+                    taivas.writeStatus()
                     taivas.reset()
                 }
             }
@@ -272,17 +281,20 @@ Page {
 
         taivas.searchUser = ""
         taivas.searchCategories["all"] = all.checked
+
         if (!all.checked) {
             for (var i = 1; i < category.children.length; i++) {
                 var child = category.children[i]
                 taivas.searchCategories[child.category] = child.checked
-                if (child.checked)
+
+                if (child.checked) {
                     taivas.searchUser += "&category=" + child.category
                     taivas.configurequery = ""
-                    taivas.setConfigureStatus(child.category, true);
+                    taivas.setConfigureStatus(child.category, true)
+                }
             }
 
-            taivas.writeStatus()
+            taivas.setConfigureStatus("all",false)
         }
 
         if (observer.text)
@@ -294,8 +306,8 @@ Page {
         taivas.searchTitle = title.text
         taivas.startDate = start.date
         taivas.endDate = end.date
+        taivas.writeStatus()
 
         taivas.havaitse()
-
     }
 }
