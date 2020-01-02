@@ -29,5 +29,3 @@ OTHER_FILES += \
 
 HEADERS += \
     config.h
-
-RESOURCES +=
