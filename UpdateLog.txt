@@ -9,6 +9,7 @@ Taivaanvahti x.x
 	* Havaintojen hakuaikaa voi jälleen muuttaa
 	* Korjattu kommentti ja kuvamäärien aiheuttama kaatuminen havaintonäkymässä (model delegate)
 	* Korjattu oletushaun palautus
+	* Poistettu komeetta-hakuparametri, koska rajapinta ei enää tarjoa sitä
 
 - Tyylimuutokset 
 	* Pulley Menun järjestys selkeämpi, ensiksi hakuihin liittyvät asiat ja sitten Tietoa-osio

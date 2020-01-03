@@ -39,14 +39,38 @@ public:
       */
     Q_INVOKABLE bool fetchStatus(QString object);
 
+    /**
+      * @brief Fetch the user parameter if set
+      */
+    Q_INVOKABLE QString fetchSearchUser();
+
+    /**
+      * @brief Fetch the title if set
+      */
+    Q_INVOKABLE QString fetchSearchTitle();
+
+    /**
+      * @brief Fetches the city
+      */
+    Q_INVOKABLE QString fetchSearchCity();
+
+    /**
+      * @brief Sets the search parameters
+      */
+    Q_INVOKABLE void setSearchParameters(QString user = "",
+                                         QString title = "",
+                                         QString city = "");
+
 signals:
 
 public slots:
 
 private:
     QMap<QString, bool> stateBank_;
-    const QString dataFile_ = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
-            + "/harbour-taivaanvahti/" + "config.txt";
+    QString searchUser_ = "";
+    QString searchTitle_ = "";
+    QString searchCity_ = "";
+
 };
 
 #endif // CONFIG_H

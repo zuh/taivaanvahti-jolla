@@ -63,6 +63,10 @@ Page {
                     taivas.searchUser = ""
                     observer.text = ""
                     title.text = ""
+                    city.text = ""
+                    taivas.searchObserver = ""
+                    taivas.searchTitle = ""
+                    taivas.searchCity = ""
                     all.checked = true
                     end.date = new Date()
                     start.date = taivas.makeOffsetDate()
@@ -74,6 +78,7 @@ Page {
                         }
                     }
                     taivas.setConfigureStatus("all",true)
+                    taivas.setParameters("","","")
 
                     taivas.writeStatus()
                     taivas.reset()
@@ -164,14 +169,6 @@ Page {
                 }
 
                 TextSwitch {
-                    id: komeetta
-                    enabled: !all.checked
-                    property string category: "komeetta"
-                    text: "Komeetta"
-                    description: "Toiselta nimeltään pyrstötähti"
-                }
-
-                TextSwitch {
                     id: pimennys
                     enabled: !all.checked
                     property string category: "pimennys"
@@ -234,6 +231,21 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
+                text: "Kaupunki"
+            }
+
+            TextField {
+                id: city
+                width: parent.width
+                focus: false
+                placeholderText: "Mikä Tahansa"
+            }
+
+            Label {
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                font.family: Theme.fontFamilyHeading
                 text: "Havainnon tekijä"
             }
 
@@ -270,6 +282,7 @@ Page {
 
         observer.text = taivas.searchObserver
         title.text = taivas.searchTitle
+        city.text = taivas.searchCity
     }
 
     onStatusChanged: {
@@ -301,11 +314,17 @@ Page {
             taivas.searchUser += "&user=" + encodeURIComponent(observer.text)
         if (title.text)
             taivas.searchUser += "&title=" + encodeURIComponent(title.text)
+        if (city.text)
+            taivas.searchUser += "&city=" + encodeURIComponent(city.text)
 
         taivas.searchObserver = observer.text
         taivas.searchTitle = title.text
+        taivas.searchCity = city.text
+        taivas.setParameters(observer.text, title.text, city.text)
+
         taivas.startDate = start.date
         taivas.endDate = end.date
+
         taivas.writeStatus()
 
         taivas.havaitse()

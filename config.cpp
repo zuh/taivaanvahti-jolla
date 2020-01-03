@@ -41,6 +41,18 @@ void Config::writeStatus()
         outStream << object.key() << "=" << state << "\n";
     }
 
+    if (searchUser_ != "") {
+        outStream << "user=" << searchUser_ << "\n";
+    }
+
+    if (searchTitle_ != "") {
+        outStream << "title=" << searchTitle_ << "\n";
+    }
+
+    if (searchCity_ != "") {
+        outStream << "city=" << searchCity_ << "\n";
+    }
+
     file.close();
 }
 
@@ -66,19 +78,36 @@ bool Config::readStatus()
         line.remove(QRegExp("[\n]"));
         QStringList lineList = line.split("=");
         QString first = lineList.at(0);
+        QString secondPart = lineList.at(1);
         bool second = false;
 
         if (lineList.at(1) == "true") {
             second = true;
         }
-        stateBank_.insert(first,second);
+
+        if (first == "user" or first == "title" or first == "city") {
+            if (first == "user") {
+                searchUser_ = secondPart;
+            }
+
+            if (first == "title") {
+                searchTitle_ = secondPart;
+            }
+
+            if (first == "city") {
+                searchCity_ = secondPart;
+            }
+
+        } else {
+            stateBank_.insert(first,second);
+        }
     }
 
     file.close();
 
     if (stateBank_.count() == 0) {
         /* Something other went wrong in the reading process
-         * stateBank can't be empty if reading successfull!
+         * stateBank can't ever be empty if reading successfull!
          */
         return false;
     }
@@ -94,4 +123,40 @@ void Config::setStatus(QString object, bool status)
 bool Config::fetchStatus(QString object)
 {
     return stateBank_[object];
+}
+
+QString Config::fetchSearchUser()
+{
+    return searchUser_;
+}
+
+QString Config::fetchSearchTitle()
+{
+    return searchTitle_;
+}
+
+QString Config::fetchSearchCity()
+{
+    return searchCity_;
+}
+
+void Config::setSearchParameters(QString user, QString title, QString city)
+{
+    if (user != "") {
+        searchUser_ = user;
+    }
+
+    if (title != "") {
+        searchTitle_ = title;
+    }
+
+    if (city != "") {
+        searchCity_ = city;
+    }
+
+    if (user == "" && title == "" && city == "") {
+        searchUser_ = "";
+        searchTitle_ = "";
+        searchCity_ = "";
+    }
 }

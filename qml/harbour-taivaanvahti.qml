@@ -52,7 +52,7 @@ ApplicationWindow
     property bool searchRunning: false
     property bool detailedSearchRunning: false
     property bool commentSearchRunning: false
-
+    property string searchCity: ""
     property string configurequery: ""
     property string userName: ""
     property string copyright: "© 2020 "
@@ -69,7 +69,6 @@ ApplicationWindow
     property var searchCategories: {
         "all": true,
         "tahtikuva": false,
-        "komeetta": false,
         "pimennys": false,
         "tulipallo": false,
         "revontuli": false,
@@ -79,11 +78,17 @@ ApplicationWindow
         "muu": false
     }
 
+    function setParameters(user, title, city) {
+        config.setSearchParameters(user,title,city)
+    }
+
     function writeStatus() {
+        // method to call from other qml files
         config.writeStatus()
     }
 
     function setConfigureStatus(object, status) {
+        // Method to call from other qml files
         config.setStatus(object,status)
     }
 
@@ -104,6 +109,21 @@ ApplicationWindow
                 searchCategories[p] = config.fetchStatus(p)
             }
 
+            if (config.fetchSearchUser() !== "") {
+                searchUser += "&user=" + config.fetchSearchUser()
+                searchObserver = config.fetchSearchUser()
+            }
+
+            if (config.fetchSearchCity() !== "") {
+                searchUser += "&city=" + config.fetchSearchCity()
+                searchCity = config.fetchSearchCity()
+            }
+
+            if (config.fetchSearchTitle() !== "") {
+                searchUser += "&title=" + config.fetchSearchTitle()
+                searchTitle = config.fetchSearchTitle()
+            }
+
             // Update categories for query
             for (var i in searchCategories) {
                 if (searchCategories[i]) {
@@ -111,7 +131,9 @@ ApplicationWindow
                 }
             }
         } else {
-            // No data file yet
+            /* No data file found for taivaanvahti
+             * Generating new using Config class
+             */
             for (var object in searchCategories) {
                 // Set the current default state for QMap
                 config.setStatus(object,searchCategories[object]);
