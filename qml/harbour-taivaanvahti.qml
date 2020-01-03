@@ -37,6 +37,9 @@ ApplicationWindow
     id: taivas
 
     ConfigReader {
+        /* ConfigReader for reading and writing application data
+         * Take a look at config.cpp and config.h for better info
+         */
         id: config
     }
 
@@ -76,6 +79,14 @@ ApplicationWindow
         "myrsky": false,
         "halo": false,
         "muu": false
+    }
+
+    function resetDates() {
+        config.resetDate()
+    }
+
+    function saveDate(date, dateType) {
+        config.setDate(date,dateType)
     }
 
     function setParameters(user, title, city) {
@@ -122,6 +133,12 @@ ApplicationWindow
             if (config.fetchSearchTitle() !== "") {
                 searchUser += "&title=" + config.fetchSearchTitle()
                 searchTitle = config.fetchSearchTitle()
+            }
+
+            if (config.fetchDate()) {
+                // Dates have been saved earlier
+                startDate = config.fetchRealDate("start")
+                endDate = config.fetchRealDate("end")
             }
 
             // Update categories for query

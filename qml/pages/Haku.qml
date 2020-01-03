@@ -33,6 +33,7 @@ import Sailfish.Silica 1.0
 Page {
     id: page
     property bool dialogRunning: false
+    property bool reset: false
 
     SilicaFlickable {
         id: flick
@@ -57,6 +58,7 @@ Page {
             anchors.rightMargin: Theme.paddingLarge
 
             Button {
+                id: defaultQuery
                 anchors.horizontalCenter: parent.Center
                 text: "Palauta oletushaku"
                 onClicked: {
@@ -77,11 +79,14 @@ Page {
                             taivas.setConfigureStatus(p,false);
                         }
                     }
+                    taivas.resetDates()
+
                     taivas.setConfigureStatus("all",true)
                     taivas.setParameters("","","")
 
                     taivas.writeStatus()
                     taivas.reset()
+                    reset = true
                 }
             }
 
@@ -226,6 +231,17 @@ Page {
 
             }
 
+            Button {
+                id: release
+                text: "Nollaa tekstikentät"
+                onClicked: {
+                    city.text = ""
+                    observer.text = ""
+                    title.text = ""
+                }
+
+            }
+
             Label {
                 anchors.left: parent.left
                 font.pixelSize: Theme.fontSizeSmall
@@ -325,8 +341,14 @@ Page {
         taivas.startDate = start.date
         taivas.endDate = end.date
 
+        if (!reset) {
+            taivas.saveDate(start.date,"start")
+            taivas.saveDate(end.date,"end")
+        }
+
         taivas.writeStatus()
 
         taivas.havaitse()
+        reset = false
     }
 }

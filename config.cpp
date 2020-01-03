@@ -53,6 +53,14 @@ void Config::writeStatus()
         outStream << "city=" << searchCity_ << "\n";
     }
 
+    if (start != "") {
+        outStream << "start=" << start << "\n";
+    }
+
+    if (end != "") {
+        outStream << "end=" << end << "\n";
+    }
+
     file.close();
 }
 
@@ -85,7 +93,8 @@ bool Config::readStatus()
             second = true;
         }
 
-        if (first == "user" or first == "title" or first == "city") {
+        if (first == "user" or first == "title" or first == "city" or
+                first == "start" or first == "end") {
             if (first == "user") {
                 searchUser_ = secondPart;
             }
@@ -98,7 +107,16 @@ bool Config::readStatus()
                 searchCity_ = secondPart;
             }
 
-        } else {
+            if (first == "start") {
+                start = secondPart;
+            }
+
+            if (first == "end") {
+                end = secondPart;
+            }
+
+        }
+        else {
             stateBank_.insert(first,second);
         }
     }
@@ -159,4 +177,43 @@ void Config::setSearchParameters(QString user, QString title, QString city)
         searchTitle_ = "";
         searchCity_ = "";
     }
+}
+
+QDate Config::fetchRealDate(QString date)
+{
+    QDate returnDate;
+
+    if (date == "start") {
+        const QString starting = start;
+        returnDate = QDate::fromString(starting,"yyyy-MM-dd");
+    } else {
+        const QString ending = end;
+        returnDate = QDate::fromString(ending,"yyyy-MM-dd");
+    }
+
+    return returnDate;
+}
+
+bool Config::fetchDate()
+{
+    if (start != "" && end != "") {
+        return true;
+    }
+
+    return false;
+}
+
+void Config::setDate(QDate date, QString dateType)
+{
+    if (dateType == "start") {
+        start = date.toString("yyyy-MM-dd");
+    } else {
+        end = date.toString("yyyy-MM-dd");
+    }
+}
+
+void Config::resetDate()
+{
+    start = "";
+    end = "";
 }

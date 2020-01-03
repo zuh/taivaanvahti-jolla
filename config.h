@@ -6,6 +6,7 @@
 #include <QtQuick>
 #include <QString>
 #include <QFile>
+#include <QDate>
 
 /**
  * @brief The Config class provides api for reading and writing application
@@ -61,6 +62,14 @@ public:
                                          QString title = "",
                                          QString city = "");
 
+    Q_INVOKABLE bool fetchDate();
+
+    Q_INVOKABLE QDate fetchRealDate(QString date);
+
+    Q_INVOKABLE void setDate(QDate date, QString dateType);
+
+    Q_INVOKABLE void resetDate();
+
 signals:
 
 public slots:
@@ -70,6 +79,8 @@ private:
     QString searchUser_ = "";
     QString searchTitle_ = "";
     QString searchCity_ = "";
+    QString start = "";
+    QString end = "";
 
 };
 
