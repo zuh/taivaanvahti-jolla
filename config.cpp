@@ -15,7 +15,7 @@ void Config::writeStatus()
         QFile file(path);
 
         if (file.exists()) {
-            qDebug() << "File exists";
+            file.remove();
         }
 
         file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -38,7 +38,6 @@ void Config::writeStatus()
                 } else {
                     state = "false";
                 }
-
                 outStream << object.key() << "=" << state << "\n";
             }
 
@@ -95,8 +94,8 @@ bool Config::readStatus()
         QString secondPart = lineList.at(1);
         bool second = false;
 
-        if (lineList.at(1) == "true") {
-            second = true;
+        if (first == "config" && secondPart == "true") {
+            configurable_ = true;
         }
 
         if (first == "user" or first == "title" or first == "city" or
@@ -120,24 +119,16 @@ bool Config::readStatus()
             if (first == "end") {
                 end = secondPart;
             }
-
-            if (first == "config" && secondPart == "true") {
-                configurable_ = true;
-            }
         }
         else {
+            if (lineList.at(1) == "true") {
+                second = true;
+            }
             stateBank_.insert(first,second);
         }
     }
 
     file.close();
-
-    if (stateBank_.count() == 0) {
-        /* Something other went wrong in the reading process
-         * stateBank can't ever be empty if reading successfull!
-         */
-        return false;
-    }
 
    return true;
 }

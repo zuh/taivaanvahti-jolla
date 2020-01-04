@@ -51,6 +51,7 @@ ApplicationWindow
     property var kommentit: ListModel {}
     property var viimeiset: ListModel {}
 
+    property bool configurable: false
     property bool configured: false
     property bool searchRunning: false
     property bool detailedSearchRunning: false
@@ -122,41 +123,43 @@ ApplicationWindow
     function configure() {
         // Application launch configuration
 
-    if (config.isConfigurable()) {
         if (config.readStatus() ) {
+
+            if (config.isConfigurable()) {
             // Update searchCategories from file
-            for (var p in searchCategories) {
-                searchCategories[p] = config.fetchStatus(p)
-            }
-
-            if (config.fetchSearchUser() !== "") {
-                searchUser += "&user=" + config.fetchSearchUser()
-                searchObserver = config.fetchSearchUser()
-            }
-
-            if (config.fetchSearchCity() !== "") {
-                searchUser += "&city=" + config.fetchSearchCity()
-                searchCity = config.fetchSearchCity()
-            }
-
-            if (config.fetchSearchTitle() !== "") {
-                searchUser += "&title=" + config.fetchSearchTitle()
-                searchTitle = config.fetchSearchTitle()
-            }
-
-            if (config.fetchDate()) {
-                // Dates have been saved earlier
-                startDate = config.fetchRealDate("start")
-
-                if (endDate <= config.fetchRealDate("end")) {
-                    endDate = config.fetchRealDate("end")
+                for (var p in searchCategories) {
+                    searchCategories[p] = config.fetchStatus(p)
                 }
-            }
 
-            // Update categories for query
-            for (var i in searchCategories) {
-                if (searchCategories[i]) {
-                    configurequery += "&category=" + i
+                if (config.fetchSearchUser() !== "") {
+                    searchUser += "&user=" + config.fetchSearchUser()
+                    searchObserver = config.fetchSearchUser()
+                }
+
+                if (config.fetchSearchCity() !== "") {
+                    searchUser += "&city=" + config.fetchSearchCity()
+                    searchCity = config.fetchSearchCity()
+                }
+
+                if (config.fetchSearchTitle() !== "") {
+                    searchUser += "&title=" + config.fetchSearchTitle()
+                    searchTitle = config.fetchSearchTitle()
+                }
+
+                if (config.fetchDate()) {
+                    // Dates have been saved earlier
+                    startDate = config.fetchRealDate("start")
+
+                    if (endDate <= config.fetchRealDate("end")) {
+                        endDate = config.fetchRealDate("end")
+                    }
+                }
+
+                // Update categories for query
+                for (var i in searchCategories) {
+                    if (searchCategories[i]) {
+                        configurequery += "&category=" + i
+                    }
                 }
             }
         } else {
@@ -170,8 +173,6 @@ ApplicationWindow
 
             config.writeStatus();
         }
-
-      }
 
         taivas.havaitse()
     }

@@ -34,7 +34,7 @@ Page {
     id: page
     property bool dialogRunning: false
     property bool reset: false
-    property bool configurable: false
+    property bool config: false
 
     SilicaFlickable {
         id: flick
@@ -105,7 +105,7 @@ Page {
 
                 TextSwitch {
                     id: isConfigurable
-                    checked: configurable
+                    checked: config
                     property string category: "configurable"
                     text: "Konfigurointi"
                     description: "Kaikki hakuparametrit ja aikajakso tallennetaan käyttökertojen välillä"
@@ -316,8 +316,8 @@ Page {
             child.checked = taivas.searchCategories[child.category]
         }
 
-        if (taivas.isConfigurable()) {
-            configurable = true
+        if (taivas.isConfigurable() || taivas.configurable) {
+            config = true
         }
 
         observer.text = taivas.searchObserver
