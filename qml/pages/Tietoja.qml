@@ -43,7 +43,7 @@ Page {
 
         PageHeader {
             id: header
-            title: "Taivaanvahti sovelluksesta"
+            title: "Taivaanvahti v. 1.1"
         }
 
         Column {
@@ -163,7 +163,7 @@ Page {
             BackgroundItem {
                 id: dev
                 height: Theme.itemSizeSmall
-                property string developer: "Santeri Kangas"
+                property string developer: "Santeri Kangas <katso GitHub alusta>"
 
                 Label {
                     anchors.centerIn: parent

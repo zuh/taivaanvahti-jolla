@@ -1,4 +1,4 @@
-Taivaanvahti x.x
+Taivaanvahti 1.1
 
 - Lisäosana
 	* Havaintokategoriat tallennetaan nyt eri käyttökertojen välillä
