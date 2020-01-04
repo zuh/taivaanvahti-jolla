@@ -70,12 +70,17 @@ public:
 
     Q_INVOKABLE void resetDate();
 
+    Q_INVOKABLE bool isConfigurable();
+
+    Q_INVOKABLE void setConfigurable(bool status);
+
 signals:
 
 public slots:
 
 private:
     QMap<QString, bool> stateBank_;
+    bool configurable_ = false;
     QString searchUser_ = "";
     QString searchTitle_ = "";
     QString searchCity_ = "";

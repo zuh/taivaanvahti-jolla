@@ -16,3 +16,4 @@ Taivaanvahti x.x
 	* Tekniset tiedot ja kuvakenttä otsikot on asetettu vasempaan reunaan
 	* Yläotsikkokentät pidetty yhä vasemmassa reunassa
 	* Cover-sivulla näkyy nyt kategorian sijaan havainnon otsikko
+	* Lisätty tyhjennyskenttä tekstihakukentille ja konfiguraation tilavalinta => päällä / pois

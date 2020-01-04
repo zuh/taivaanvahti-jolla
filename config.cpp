@@ -7,59 +7,65 @@ Config::Config(QObject *parent) : QObject(parent)
 
 void Config::writeStatus()
 {
-    QString datadir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
-    QDir dir(datadir);
-    dir.mkpath("harbour-taivaanvahti");
-    QString path = datadir + "/" + "harbour-taivaanvahti" + "/" + "config.txt";
+        QString datadir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+        QDir dir(datadir);
+        dir.mkpath("harbour-taivaanvahti");
+        QString path = datadir + "/" + "harbour-taivaanvahti" + "/" + "config.txt";
 
-    QFile file(path);
+        QFile file(path);
 
-    if (file.exists()) {
-        qDebug() << "File exists";
-    }
-
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
-
-    if (!file.isOpen()) {
-        // File opening failed
-        return;
-    }
-
-    QTextStream outStream(&file);
-
-    QMap<QString, bool>::iterator object;
-
-    for (object = stateBank_.begin(); object != stateBank_.end(); object++) {
-        QString state = "";
-
-        if (object.value() == true) {
-            state = "true";
-        } else {
-            state = "false";
+        if (file.exists()) {
+            qDebug() << "File exists";
         }
 
-        outStream << object.key() << "=" << state << "\n";
-    }
+        file.open(QIODevice::WriteOnly | QIODevice::Text);
 
-    if (searchUser_ != "") {
-        outStream << "user=" << searchUser_ << "\n";
-    }
+        if (!file.isOpen()) {
+            // File opening failed
+            return;
+        }
 
-    if (searchTitle_ != "") {
-        outStream << "title=" << searchTitle_ << "\n";
-    }
+        QTextStream outStream(&file);
 
-    if (searchCity_ != "") {
-        outStream << "city=" << searchCity_ << "\n";
-    }
+        if (configurable_) {
+            QMap<QString, bool>::iterator object;
 
-    if (start != "") {
-        outStream << "start=" << start << "\n";
-    }
+            for (object = stateBank_.begin(); object != stateBank_.end(); object++) {
+                QString state = "";
 
-    if (end != "") {
-        outStream << "end=" << end << "\n";
-    }
+                if (object.value() == true) {
+                    state = "true";
+                } else {
+                    state = "false";
+                }
+
+                outStream << object.key() << "=" << state << "\n";
+            }
+
+            if (searchUser_ != "") {
+                outStream << "user=" << searchUser_ << "\n";
+            }
+
+            if (searchTitle_ != "") {
+                outStream << "title=" << searchTitle_ << "\n";
+            }
+
+            if (searchCity_ != "") {
+                outStream << "city=" << searchCity_ << "\n";
+            }
+
+            if (start != "") {
+                outStream << "start=" << start << "\n";
+            }
+
+            if (end != "") {
+                outStream << "end=" << end << "\n";
+            }
+
+            outStream << "config=true" << "\n";
+        } else {
+            outStream << "config=false" << "\n";
+        }
 
     file.close();
 }
@@ -115,6 +121,9 @@ bool Config::readStatus()
                 end = secondPart;
             }
 
+            if (first == "config" && secondPart == "true") {
+                configurable_ = true;
+            }
         }
         else {
             stateBank_.insert(first,second);
@@ -216,4 +225,14 @@ void Config::resetDate()
 {
     start = "";
     end = "";
+}
+
+bool Config::isConfigurable()
+{
+    return configurable_;
+}
+
+void Config::setConfigurable(bool status)
+{
+    configurable_ = status;
 }

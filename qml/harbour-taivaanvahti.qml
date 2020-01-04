@@ -111,9 +111,18 @@ ApplicationWindow
         taivas.havaitse()
     }
 
+    function isConfigurable() {
+        return config.isConfigurable()
+    }
+
+    function setConfigurable(status) {
+        config.setConfigurable(status)
+    }
+
     function configure() {
         // Application launch configuration
 
+    if (config.isConfigurable()) {
         if (config.readStatus() ) {
             // Update searchCategories from file
             for (var p in searchCategories) {
@@ -138,7 +147,10 @@ ApplicationWindow
             if (config.fetchDate()) {
                 // Dates have been saved earlier
                 startDate = config.fetchRealDate("start")
-                endDate = config.fetchRealDate("end")
+
+                if (endDate <= config.fetchRealDate("end")) {
+                    endDate = config.fetchRealDate("end")
+                }
             }
 
             // Update categories for query
@@ -158,6 +170,8 @@ ApplicationWindow
 
             config.writeStatus();
         }
+
+      }
 
         taivas.havaitse()
     }

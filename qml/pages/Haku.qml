@@ -34,6 +34,7 @@ Page {
     id: page
     property bool dialogRunning: false
     property bool reset: false
+    property bool configurable: false
 
     SilicaFlickable {
         id: flick
@@ -90,6 +91,27 @@ Page {
                 }
             }
 
+            Label {
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                font.family: Theme.fontFamilyHeading
+                text: "Konfigurointi"
+            }
+
+            Column {
+                id: configuration
+                width: parent.width
+
+                TextSwitch {
+                    id: isConfigurable
+                    checked: configurable
+                    property string category: "configurable"
+                    text: "Konfigurointi"
+                    description: "Kaikki hakuparametrit ja aikajakso tallennetaan käyttökertojen välillä"
+                }
+            }
+
             Column {
                 id: dates
                 width: parent.width
@@ -142,8 +164,6 @@ Page {
                     }
                 }
             }
-
-
 
             Label {
                 anchors.left: parent.left
@@ -296,6 +316,10 @@ Page {
             child.checked = taivas.searchCategories[child.category]
         }
 
+        if (taivas.isConfigurable()) {
+            configurable = true
+        }
+
         observer.text = taivas.searchObserver
         title.text = taivas.searchTitle
         city.text = taivas.searchCity
@@ -324,6 +348,12 @@ Page {
             }
 
             taivas.setConfigureStatus("all",false)
+        }
+
+        if (isConfigurable.checked) {
+            taivas.setConfigurable(true)
+        } else {
+            taivas.setConfigurable(false)
         }
 
         if (observer.text)
