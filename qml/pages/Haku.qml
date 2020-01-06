@@ -275,6 +275,9 @@ Page {
                 width: parent.width
                 focus: false
                 placeholderText: "Mikä Tahansa"
+
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
             }
 
             Label {
@@ -290,6 +293,9 @@ Page {
                 width: parent.width
                 focus: false
                 placeholderText: "Kuka Tahansa"
+
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
             }
 
             Label {
@@ -305,8 +311,10 @@ Page {
                 width: parent.width
                 focus: false
                 placeholderText: "Mikä Tahansa"
-            }
 
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
+            }
         }
     }
 
