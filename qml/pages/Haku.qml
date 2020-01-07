@@ -96,7 +96,7 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
-                text: "Konfigurointi"
+                text: "Tallennus"
             }
 
             Column {
@@ -107,7 +107,7 @@ Page {
                     id: isConfigurable
                     checked: config
                     property string category: "configurable"
-                    text: "Konfigurointi"
+                    text: "Tallenna hakuparametrit"
                     description: "Kaikki hakuparametrit ja aikajakso tallennetaan käyttökertojen välillä"
                 }
             }

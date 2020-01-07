@@ -56,6 +56,23 @@ Page {
             anchors.right: parent.right
             anchors.rightMargin: Theme.paddingLarge
 
+            Label {
+                id: sovellusotsikko
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                font.family: Theme.fontFamilyHeading
+                text: "Taivaanvahti 1.1 versiosta"
+            }
+
+            Label {
+                id: sovellus
+                width: parent.width
+                wrapMode: Text.WordWrap
+                maximumLineCount: 1024
+                text: "Tietoa sovelluksesta tähän"
+            }
+
             BackgroundItem {
                 id: tv
                 height: Theme.itemSizeSmall
