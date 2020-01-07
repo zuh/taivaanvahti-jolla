@@ -62,7 +62,7 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
-                text: "Taivaanvahti 1.1 versiosta"
+                text: "Uudesta versiosta"
             }
 
             Label {
@@ -70,21 +70,19 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
-                text: "Tietoa sovelluksesta tähän"
+                text: "Alkuperäistä Taivaanvahti sovellusta on kehitetty eteenpäin ja "
+                    + "ensinnäkin korjattu yhteensopivaksi Sailfish 3.2 -version kanssa. "
+                    + "Uutena ominaisuutena on hakuparametrien tallennus ja kaupungin "
+                    + "perusteella hakeminen. Sovellukseen on myös tehty pieniä tyylimuutoksia."
             }
 
-            BackgroundItem {
+            Label {
                 id: tv
-                height: Theme.itemSizeSmall
-                property string url: "http://www.taivaanvahti.fi"
-
-                Label {
-                    anchors.centerIn: parent
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: tv.url
-                }
-
-                onClicked: Qt.openUrlExternally(url)
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                font.family: Theme.fontFamilyHeading
+                text: "Taivaanvahdista"
             }
 
             Label {
@@ -92,7 +90,7 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
-                text: "Taivaanvahti on Ursan havaintojärjestelmä, jonka tietokantaan "
+                text: "Taivaanvahti (taivaanvahti.fi) on Ursan havaintojärjestelmä, jonka tietokantaan "
                     + "kerätään tähtitieteellisten ja ilmakehän ilmiöiden havaintoja."
             }
 
@@ -102,7 +100,8 @@ Page {
                 maximumLineCount: 1024
                 text: "Tämä sovellus ei ole virallinen osa Taivaanvahtijärjestelmää, "
                     + "mutta se on kehitetty Taivaanvahdin ylläpidon avulla. Tähän sovellukseen "
-                    + "liittyvät kysymykset voi lähettää kehittäjille (kts. sivun loppu)"
+                    + "liittyvät kysymykset / ongelmat voi lähettää GitHub-palveluun (katso linkki alempaa). "
+                    + "Palaute on sallittua ja toivottua"
             }
 
             Label {
@@ -180,7 +179,7 @@ Page {
             BackgroundItem {
                 id: dev
                 height: Theme.itemSizeSmall
-                property string developer: "Santeri Kangas <katso GitHub alusta>"
+                property string developer: "Santeri Kangas <katso GitHub>"
 
                 Label {
                     anchors.centerIn: parent
