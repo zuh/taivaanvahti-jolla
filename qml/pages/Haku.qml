@@ -253,7 +253,7 @@ Page {
 
             Button {
                 id: release
-                text: "Nollaa tekstikentät"
+                text: "Tyhjennä tekstikentät"
                 onClicked: {
                     city.text = ""
                     observer.text = ""
