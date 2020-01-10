@@ -43,7 +43,7 @@ Page {
 
         PageHeader {
             id: header
-            title: "Taivaanvahti v. 1.1"
+            title: "Taivaanvahti v. 2.0"
         }
 
         Column {

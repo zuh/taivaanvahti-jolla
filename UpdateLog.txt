@@ -1,8 +1,8 @@
-Taivaanvahti 1.1
+Taivaanvahti 2.0
 
 - Lisäosana
-	* Havaintokategoriat tallennetaan nyt eri käyttökertojen välillä
-	Tulevaisuudessa ehkä muutkin hakuparametrit mukaan
+	* Havaintojen hakuparametrit tallennetaan käyttökertojen välissä ja ominaisuus on 
+	  kytkettävissä päälle / pois
 
 - Korjattu yhteensopivaksi Sailfish 3.2 kanssa
 	* Havainnot näkyvät taas

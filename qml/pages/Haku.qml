@@ -121,7 +121,7 @@ Page {
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.highlightColor
                     font.family: Theme.fontFamilyHeading
-                    text: "Aikajakso"
+                    text: "Aikaväli"
                 }
 
                 ValueButton {
@@ -139,7 +139,6 @@ Page {
                             page.dialogRunning = false
                             if (dialog.date < end.date)
                                 taivas.startDate = dialog.date
-                            taivas.reset()
                         })
                     }
                 }
@@ -159,7 +158,6 @@ Page {
                             page.dialogRunning = false
                             if (dialog.date > start.date)
                                 taivas.endDate = dialog.date
-                            taivas.reset()
                         })
                     }
                 }
@@ -189,7 +187,7 @@ Page {
                     id: tahtikuva
                     enabled: !all.checked
                     property string category: "tahtikuva"
-                    text: "Tähdet ja aurinkokunta"
+                    text: "Syvä avaruus"
                     description: "Avaruuden kappaleet"
                 }
 
