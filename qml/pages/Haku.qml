@@ -62,6 +62,7 @@ Page {
                 id: defaultQuery
                 anchors.horizontalCenter: parent.Center
                 text: "Palauta oletushaku"
+
                 onClicked: {
                     taivas.searchUser = ""
                     observer.text = ""
@@ -109,6 +110,17 @@ Page {
                     property string category: "configurable"
                     text: "Tallenna hakuparametrit"
                     description: "Kaikki hakuparametrit ja aikajakso tallennetaan käyttökertojen välillä"
+                }
+            }
+
+            Button {
+                id: defaultTime
+                text: "Alusta aikaväli"
+
+                onClicked: {
+                    start.date = taivas.makeOffsetDate()
+                    end.date = new Date()
+                    taivas.resetDates()
                 }
             }
 
