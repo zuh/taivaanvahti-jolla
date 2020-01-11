@@ -1,19 +1,22 @@
 Taivaanvahti 2.0
 
-- Lisäosana
-	* Havaintojen hakuparametrit tallennetaan käyttökertojen välissä ja ominaisuus on 
+- Lisäosana / uutena
+	* Havaintojen hakuparametrit/aikajakso tallennetaan käyttökertojen välissä ja ominaisuus on 
 	  kytkettävissä päälle / pois
+	* Kaupunki hakuparametri
+	* Havaintonäkymässä näytetään nyt myös havainnon kategoria
 
 - Korjattu yhteensopivaksi Sailfish 3.2 kanssa
-	* Havainnot näkyvät taas
-	* Havaintojen hakuaikaa voi jälleen muuttaa
-	* Korjattu kommentti ja kuvamäärien aiheuttama kaatuminen havaintonäkymässä (model delegate)
+	* Rajapintapyynnöt ja käsittely korjattu, joten havainnot näkyvät taas
+	* Korjattu kommentti ja kuvamäärien aiheuttama kaatuminen havaintonäkymässä (model delegate -ongelma)
 	* Korjattu oletushaun palautus
 	* Poistettu komeetta-hakuparametri, koska rajapinta ei enää tarjoa sitä
 
-- Tyylimuutokset 
+- Tyyli- ja muut muutokset
+	* Joitakin tekstejä on muokattu ja selkeytetty yhteensopivaksi nykyisen version kanssa
+	* Tietoa-osioon lisätty tiedot nykyisestä sovelluksesta ja sen tilasta, sillä kehitys on muuttunut
 	* Pulley Menun järjestys selkeämpi, ensiksi hakuihin liittyvät asiat ja sitten Tietoa-osio
-	* Tekniset tiedot ja kuvakenttä otsikot on asetettu vasempaan reunaan
-	* Yläotsikkokentät pidetty yhä vasemmassa reunassa
+	* Muut tekstit kuin PageHeaderit on nyt tasattu vasempaan reunaan 
 	* Cover-sivulla näkyy nyt kategorian sijaan havainnon otsikko
-	* Lisätty tyhjennyskenttä tekstihakukentille ja konfiguraation tilavalinta => päällä / pois
+	* Tietoa-osioon lisätty vakio aikavälin palautus- ja hakutekstikenttien tyhjennysnappi. Lisäksi jo
+	  ylempänä mainittu konfiguraatiotäppä päälle / pois

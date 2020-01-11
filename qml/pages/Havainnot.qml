@@ -82,7 +82,7 @@ Page {
 
         delegate: BackgroundItem {
 
-            height: Theme.itemSizeLarge
+            height: Theme.itemSizeExtraLarge // Standard was large
 
             Column {
                 id: h
@@ -95,6 +95,14 @@ Page {
                     width: parent.width
                     text: title
                     font.pixelSize: Theme.fontSizeSmall
+                    elide: Text.ElideRight
+                }
+
+                Label {
+                    width: parent.width
+                    text: category
+                    font.pixelSize: Theme.fontSizeTiny
+                    color: Theme.secondaryColor
                     elide: Text.ElideRight
                 }
                 Label {
