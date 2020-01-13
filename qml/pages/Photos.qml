@@ -115,13 +115,13 @@ Page {
                 enabled: true
                 onClicked: {
                     photo.toggleSize()
+
                     if (photo.scaled)
                         drag.target = null
                     else
                         drag.target = photo
                 }
             }
-
         }
 
         function resetSize() {

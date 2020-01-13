@@ -73,7 +73,8 @@ Page {
                 text: "Alkuperäistä Taivaanvahti sovellusta on kehitetty eteenpäin ja "
                     + "ensinnäkin korjattu yhteensopivaksi Sailfish 3.2 -version kanssa. "
                     + "Uutena ominaisuutena on hakuparametrien tallennus ja kaupungin "
-                    + "perusteella hakeminen. Sovellukseen on myös tehty pieniä tyylimuutoksia."
+                    + "perusteella hakeminen. Sovellukseen on myös tehty pieniä tyylimuutoksia. "
+                    + "Sovellus jouduttiin myös nimeämään Taivaanvahti 2 sekaantumisen vuoksi."
             }
 
             Label {

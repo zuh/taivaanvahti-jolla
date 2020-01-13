@@ -1,6 +1,6 @@
-Name: harbour-taivaanvahti
+Name: harbour-taivaanvahti2
 Summary: Taivaanvahti
-Version: 2.0
+Version: 1.0
 Release: 1
 Group: Qt/Qt
 License: LICENSE
@@ -17,7 +17,7 @@ PkgConfigBR:
 Requires:
 - sailfishsilica-qt5
 Files:
-- /usr/share/harbour-taivaanvahti
+- /usr/share/harbour-taivaanvahti2
 - '%{_bindir}'
 - '%{_datadir}/%{name}/qml'
 - '%{_datadir}/applications/%{name}.desktop'
