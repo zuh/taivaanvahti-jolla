@@ -70,33 +70,52 @@ Page {
                 if (scaled)
                      header.title = "Sovitettu koko"
                 else
-                     header.title = "Alkuperäinen koko"
+                     header.title = "Zoomattu koko"
             }
 
             function initialSize() {
-                if (width >= sourceSize.width && height >= sourceSize.height) {
+
+                /* if (width >= sourceSize.width && height >= sourceSize.height) {
                     width = sourceSize.width
                     height = sourceSize.height
                     scaled = false
-                    panner.enabled = false
+                    panner.enabled = true
                 }
 
                 if (width > ss.width || height > ss.height) {
                     width = ss.width
                     height = ss.height
                     scaled = true
-                }
+                } */
+
+                width = ss.width
+                height = ss.height
+                panner.enabled = true
+                scaled = true
+                drag.target = null
             }
 
-            function toggleSize() {
-                if (width > ss.width || height > ss.height) {
+            function toggleSize(check) {
+                if ((width > ss.width || height > ss.height ||
+                        width >= 1.5*sourceSize.width ||
+                        height >= 1.5*sourceSize.height) && scaled !== true) {
                     width = ss.width
                     height = ss.height
                     scaled = true
                 } else {
-                    width = sourceSize.width
-                    height = sourceSize.height
+                    if (isPortrait) {
+                        width = 1.75*width
+                        height = 1.75*height
+                    } else {
+                        width = 1.5*width
+                        height = 1.5*height
+                    }
                     scaled = false
+                }
+
+                if (check) {
+                    scaled = true
+                    drag.target = null
                 }
             }
 
@@ -113,8 +132,12 @@ Page {
                 id: panner
                 anchors.fill: parent
                 enabled: true
+                hoverEnabled: true
+                drag.maximumX: width / 4
+                drag.maximumY: height / 4
+
                 onClicked: {
-                    photo.toggleSize()
+                    photo.toggleSize(false)
 
                     if (photo.scaled)
                         drag.target = null
@@ -126,6 +149,11 @@ Page {
 
         function resetSize() {
             currentItem.initialSize()
+        }
+
+        function reset() {
+            currentItem.initialSize()
+            currentItem.toggleSize(true)
         }
     }
 
@@ -148,4 +176,10 @@ Page {
         if (status === PageStatus.Deactivating)
             ss.resetSize()
     }
+
+    onOrientationChanged: {
+        ss.reset()
+        ss.update()
+    }
+
 }
