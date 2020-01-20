@@ -34,7 +34,12 @@ Page {
     id: page
     property alias currentIndex: ss.currentIndex
 
-    allowedOrientations: Orientation.All
+    allowedOrientations: {
+        if (taivas.landscape)
+            return Orientation.Landscape
+        else
+            return Orientation.Portrait
+    }
 
     PageHeader {
         id: header
@@ -103,13 +108,8 @@ Page {
                     height = ss.height
                     scaled = true
                 } else {
-                    if (isPortrait) {
-                        width = 1.75*width
-                        height = 1.75*height
-                    } else {
-                        width = 1.5*width
-                        height = 1.5*height
-                    }
+                    width = 1.75*width
+                    height = 1.75*height
                     scaled = false
                 }
 
@@ -141,14 +141,8 @@ Page {
 
                     if (photo.scaled) {
                         drag.target = null
-                        page.allowedOrientations = Orientation.All
                     } else {
                         drag.target = photo
-                        if (isPortrait) {
-                            page.allowedOrientations = Orientation.Portrait
-                        } else {
-                            page.allowedOrientations = Orientation.Landscape
-                        }
                     }
                 }
             }

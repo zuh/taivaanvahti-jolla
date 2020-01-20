@@ -53,21 +53,26 @@ ApplicationWindow
 
     property bool configurable: false
     property bool configured: false
+    property bool landscape: true
     property bool searchRunning: false
     property bool detailedSearchRunning: false
     property bool commentSearchRunning: false
+
     property string searchCity: ""
     property string configurequery: ""
     property string userName: ""
     property string copyright: "© 2020 "
     property string searchUser: ""
+
     property string searchUrl: "https://www.taivaanvahti.fi/app/api/search.php?format=json"
     property string defaultColumns: "&columns=id,title,start,city,category,thumbnails,comments"
     property string detailedColumns: "&columns=user,team,description,details,link,equipment,images"
     property string commentUrl: "https://www.taivaanvahti.fi/app/api/comment_search.php?format=json"
+
     property int dateOffset: 7
     property var startDate: makeOffsetDate()
     property var endDate: new Date()
+
     property string searchObserver: ""
     property string searchTitle: ""
     property var searchCategories: {
@@ -120,6 +125,10 @@ ApplicationWindow
         config.setConfigurable(status)
     }
 
+    function setLandScape(status) {
+        config.notLandScape(status)
+    }
+
     function configure() {
         // Application launch configuration
 
@@ -154,6 +163,9 @@ ApplicationWindow
                         endDate = config.fetchRealDate("end")
                     }
                 }
+
+                if (!config.isLandScape)
+                    landscape = false
 
                 // Update categories for query
                 for (var i in searchCategories) {

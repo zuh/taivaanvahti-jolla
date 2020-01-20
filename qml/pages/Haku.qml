@@ -97,6 +97,26 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
+                text: "Havaintokuvat"
+            }
+
+            Column {
+                width: parent.width
+
+                TextSwitch {
+                    id: landscapemode
+                    checked: taivas.landscape
+                    property string category: "landscape"
+                    text: "Näytä LandScape-moodissa"
+                    description: "Valitse näytetäänkö havaintokuvat landscape vai portrait muodossa"
+                }
+            }
+
+            Label {
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                font.family: Theme.fontFamilyHeading
                 text: "Tallennus"
             }
 
@@ -108,8 +128,8 @@ Page {
                     id: isConfigurable
                     checked: config
                     property string category: "configurable"
-                    text: "Tallenna hakuparametrit"
-                    description: "Kaikki hakuparametrit ja aikajakso tallennetaan käyttökertojen välillä"
+                    text: "Tallenna hakuparametrit ja asetukset"
+                    description: "Kaikki hakuparametrit, aikajakso ja asetukset tallennetaan käyttökertojen välillä"
                 }
             }
 
@@ -392,6 +412,15 @@ Page {
         if (!reset) {
             taivas.saveDate(start.date,"start")
             taivas.saveDate(end.date,"end")
+        }
+
+        if (landscapemode.checked) {
+            taivas.setLandScape(true)
+            taivas.landscape = true
+        }
+        else {
+            taivas.setLandScape(false)
+            taivas.landscape = false
         }
 
         taivas.writeStatus()

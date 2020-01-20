@@ -74,6 +74,10 @@ public:
 
     Q_INVOKABLE void setConfigurable(bool status);
 
+    Q_INVOKABLE void notLandScape(bool status);
+
+    Q_INVOKABLE bool isLandScape();
+
 signals:
 
 public slots:
@@ -81,6 +85,7 @@ public slots:
 private:
     QMap<QString, bool> stateBank_;
     bool configurable_ = false;
+    bool landScape_ = true;
     QString searchUser_ = "";
     QString searchTitle_ = "";
     QString searchCity_ = "";

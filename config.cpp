@@ -61,6 +61,10 @@ void Config::writeStatus()
                 outStream << "end=" << end << "\n";
             }
 
+            if (!landScape_) {
+                outStream << "landscape=" << "false" << "\n";
+            }
+
             outStream << "config=true" << "\n";
         } else {
             outStream << "config=false" << "\n";
@@ -96,6 +100,14 @@ bool Config::readStatus()
 
         if (first == "config" && secondPart == "true") {
             configurable_ = true;
+        }
+
+        if (first == "landscape") {
+            if (secondPart == "false") {
+                landScape_ = false;
+            } else {
+                landScape_ = true;
+            }
         }
 
         if (first == "user" or first == "title" or first == "city" or
@@ -226,4 +238,14 @@ bool Config::isConfigurable()
 void Config::setConfigurable(bool status)
 {
     configurable_ = status;
+}
+
+void Config::notLandScape(bool status)
+{
+    landScape_ = status;
+}
+
+bool Config::isLandScape()
+{
+    return landScape_;
 }
