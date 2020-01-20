@@ -139,10 +139,17 @@ Page {
                 onClicked: {
                     photo.toggleSize(false)
 
-                    if (photo.scaled)
+                    if (photo.scaled) {
                         drag.target = null
-                    else
+                        page.allowedOrientations = Orientation.All
+                    } else {
                         drag.target = photo
+                        if (isPortrait) {
+                            page.allowedOrientations = Orientation.Portrait
+                        } else {
+                            page.allowedOrientations = Orientation.Landscape
+                        }
+                    }
                 }
             }
         }
