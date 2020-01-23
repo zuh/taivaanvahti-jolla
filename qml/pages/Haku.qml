@@ -107,8 +107,9 @@ Page {
                     id: landscapemode
                     checked: taivas.landscape
                     property string category: "landscape"
-                    text: "Näytä LandScape-moodissa"
-                    description: "Valitse näytetäänkö havaintokuvat landscape vai portrait muodossa"
+                    text: "Näytä vaakatasossa (landscape)"
+                    description: "Valitse näytetäänkö kuvat vaaka- vai pystytasossa (landscape/portrait). "
+                                + "Asetus toimii ilman, että Tallenus-kohta on päällä."
                 }
             }
 
@@ -128,8 +129,8 @@ Page {
                     id: isConfigurable
                     checked: config
                     property string category: "configurable"
-                    text: "Tallenna hakuparametrit ja asetukset"
-                    description: "Kaikki hakuparametrit, aikajakso ja asetukset tallennetaan käyttökertojen välillä"
+                    text: "Tallenna hakuparametrit"
+                    description: "Kaikki hakuparametrit ja aikajakso tallennetaan käyttökertojen välillä"
                 }
             }
 

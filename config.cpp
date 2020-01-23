@@ -61,13 +61,13 @@ void Config::writeStatus()
                 outStream << "end=" << end << "\n";
             }
 
-            if (!landScape_) {
-                outStream << "landscape=" << "false" << "\n";
-            }
-
             outStream << "config=true" << "\n";
         } else {
             outStream << "config=false" << "\n";
+        }
+
+        if (!landScape_) {
+            outStream << "landscape=" << "false" << "\n";
         }
 
     file.close();

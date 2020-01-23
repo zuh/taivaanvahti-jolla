@@ -26,6 +26,7 @@ HEADERS += \
     config.h
 
 DISTFILES += \
+    UpdateLog.txt \
     harbour-taivaanvahti2.desktop \
     harbour-taivaanvahti2.png \
     qml/harbour-taivaanvahti2.qml \

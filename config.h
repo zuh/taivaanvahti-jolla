@@ -62,20 +62,52 @@ public:
                                          QString title = "",
                                          QString city = "");
 
+    /**
+      * @brief Fetches if the start and end dates are defined
+      * @return true if are defined, false if not
+      */
+
     Q_INVOKABLE bool fetchDate();
 
+    /**
+      * @brief Fetches the real given date in config
+      * @pre The date must be in config in order to work properly
+      * @return QDate based on config QString dates in format
+      * yyyy-MM-dd
+      */
     Q_INVOKABLE QDate fetchRealDate(QString date);
 
+    /**
+      * @brief Sets start or end string based on given QDate
+      * in format yyyy-MM-dd
+      */
     Q_INVOKABLE void setDate(QDate date, QString dateType);
 
+    /**
+      * @brief Resets both start and end QStrings
+      */
     Q_INVOKABLE void resetDate();
 
+    /**
+      * @brief Checks if configuration is used
+      * @return status of configurable true / false
+      */
     Q_INVOKABLE bool isConfigurable();
 
+    /**
+      * @brief Sets state based on given parameter status
+      */
     Q_INVOKABLE void setConfigurable(bool status);
 
+    /**
+      * @brief Sets the landscape into state true or false
+      */
     Q_INVOKABLE void notLandScape(bool status);
 
+    /**
+      * @brief Checks if landscape should be used
+      * @return True if it's false if not
+      */
     Q_INVOKABLE bool isLandScape();
 
 signals:

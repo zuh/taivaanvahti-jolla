@@ -53,7 +53,7 @@ Page {
             }
 
             MenuItem {
-                text: "Hakuehdot"
+                text: "Asetukset"
                 onClicked: pageStack.push("Haku.qml")
             }
 

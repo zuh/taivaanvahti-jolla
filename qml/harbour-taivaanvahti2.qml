@@ -164,9 +164,6 @@ ApplicationWindow
                     }
                 }
 
-                if (!config.isLandScape)
-                    landscape = false
-
                 // Update categories for query
                 for (var i in searchCategories) {
                     if (searchCategories[i]) {
@@ -185,6 +182,10 @@ ApplicationWindow
 
             config.writeStatus();
         }
+
+        if (!config.isLandScape())
+            // If user wants to use Portrait or LandScape
+            landscape = false
 
         taivas.havaitse()
     }

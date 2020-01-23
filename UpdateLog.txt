@@ -1,4 +1,14 @@
-Taivaanvahti 2.0
+
+Taivaanvahti 2.0-2
+
+- Muutokset
+        * Paranneltu havaintokuvien skaalausta ja näkymää
+        * SlideShowView havaintokuvat voi nyt näyttää kerrallaan joko landscape tai portrait moodissa
+        * Lisätty asetus, jolla käyttäjä voi vaihtaa tilan joko suosimaan landscape tai portait
+        * Vaihdettu "Hakuehdot" => "Asetukset" Pulley Menussa
+        * Koodia dokumentoitu paremmin
+
+Taivaanvahti 2.0-1
 
 - Lisäosana / uutena
 	* Havaintojen hakuparametrit/aikajakso tallennetaan käyttökertojen välissä ja ominaisuus on 

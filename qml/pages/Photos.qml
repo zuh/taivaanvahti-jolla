@@ -33,6 +33,8 @@ import Sailfish.Silica 1.0
 Page {
     id: page
     property alias currentIndex: ss.currentIndex
+    property real portraitScale: 2.0
+    property real landscapeScale: 1.75
 
     allowedOrientations: {
         if (taivas.landscape)
@@ -108,8 +110,14 @@ Page {
                     height = ss.height
                     scaled = true
                 } else {
-                    width = 1.75*width
-                    height = 1.75*height
+
+                    if (isPortrait) {
+                        width = portraitScale*width
+                        height = portraitScale*height
+                    } else {
+                        width = landscapeScale*width
+                        height = landscapeScale*height
+                    }
                     scaled = false
                 }
 
