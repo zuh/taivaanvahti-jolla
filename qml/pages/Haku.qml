@@ -45,7 +45,7 @@ Page {
 
         PageHeader {
             id: header
-            title: "Hakuehdot"
+            title: "Asetukset"
         }
 
         Column {
@@ -57,40 +57,6 @@ Page {
             anchors.leftMargin: Theme.paddingLarge
             anchors.right: parent.right
             anchors.rightMargin: Theme.paddingLarge
-
-            Button {
-                id: defaultQuery
-                anchors.horizontalCenter: parent.Center
-                text: "Palauta oletushaku"
-
-                onClicked: {
-                    taivas.searchUser = ""
-                    observer.text = ""
-                    title.text = ""
-                    city.text = ""
-                    taivas.searchObserver = ""
-                    taivas.searchTitle = ""
-                    taivas.searchCity = ""
-                    all.checked = true
-                    end.date = new Date()
-                    start.date = taivas.makeOffsetDate()
-
-                    for (var p in taivas.searchCategories) {
-                        if (p !== "all") {
-                            taivas.searchCategories[p] = false
-                            taivas.setConfigureStatus(p,false);
-                        }
-                    }
-                    taivas.resetDates()
-
-                    taivas.setConfigureStatus("all",true)
-                    taivas.setParameters("","","")
-
-                    taivas.writeStatus()
-                    taivas.reset()
-                    reset = true
-                }
-            }
 
             Label {
                 anchors.left: parent.left
@@ -193,6 +159,40 @@ Page {
                                 taivas.endDate = dialog.date
                         })
                     }
+                }
+            }
+
+            Button {
+                id: defaultQuery
+                anchors.horizontalCenter: parent.Center
+                text: "Palauta oletushaku"
+
+                onClicked: {
+                    taivas.searchUser = ""
+                    observer.text = ""
+                    title.text = ""
+                    city.text = ""
+                    taivas.searchObserver = ""
+                    taivas.searchTitle = ""
+                    taivas.searchCity = ""
+                    all.checked = true
+                    end.date = new Date()
+                    start.date = taivas.makeOffsetDate()
+
+                    for (var p in taivas.searchCategories) {
+                        if (p !== "all") {
+                            taivas.searchCategories[p] = false
+                            taivas.setConfigureStatus(p,false);
+                        }
+                    }
+                    taivas.resetDates()
+
+                    taivas.setConfigureStatus("all",true)
+                    taivas.setParameters("","","")
+
+                    taivas.writeStatus()
+                    taivas.reset()
+                    reset = true
                 }
             }
 

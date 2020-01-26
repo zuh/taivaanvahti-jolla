@@ -55,6 +55,7 @@ Page {
 
         model: taivas.havainnot.get(taivas.havainto).photos
 
+
         delegate: Image {
             id: photo
             width: ss.width
@@ -65,6 +66,7 @@ Page {
             source: url
             smooth: false
             property bool scaled: true
+
 
             onStatusChanged: {
                 if (status != Image.Ready)
@@ -182,13 +184,13 @@ Page {
     }
 
     onStatusChanged: {
-        if (status === PageStatus.Deactivating)
+        if (status === PageStatus.Deactivating) {
             ss.resetSize()
-    }
+            ss.model = null
+        }
 
-    onOrientationChanged: {
-        ss.reset()
-        ss.update()
+        if (status === PageStatus.Activating)
+            ss.model = taivas.havainnot.get(taivas.havainto).photos
     }
 
 }

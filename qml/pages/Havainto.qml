@@ -43,6 +43,36 @@ Page {
         contentHeight: header.height + col.height + Theme.paddingLarge
         ScrollDecorator { flickable: flick }
 
+        PullDownMenu {
+            id: pulley
+
+            MenuItem {
+                id: comment
+                text: "Jätä kommentti"
+                onClicked: pageStack.push("comment.qml")
+            }
+
+            MenuItem {
+                id: rotate
+                text: {
+                    if (!taivas.landscape)
+                        return "Näytä vaakakuvat"
+                    else
+                        return "Näytä pystykuvat"
+                }
+                onClicked: {
+
+                    if (taivas.landscape)
+                        taivas.landscape = false
+                    else
+                        taivas.landscape = true
+
+                    taivas.setLandScape(taivas.landscape)
+                    taivas.writeStatus()
+                }
+            }
+        }
+
         PageHeader {
             id: header
 

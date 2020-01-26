@@ -30,4 +30,5 @@ DISTFILES += \
     harbour-taivaanvahti2.desktop \
     harbour-taivaanvahti2.png \
     qml/harbour-taivaanvahti2.qml \
+    qml/pages/comment.qml \
     rpm/harbour-taivaanvahti2.spec
