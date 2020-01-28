@@ -32,7 +32,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
-    property alias currentIndex: ss.currentIndex
+    property int currentIndex: 0
     property real portraitScale: 2.0
     property real landscapeScale: 1.75
 
@@ -186,11 +186,16 @@ Page {
     onStatusChanged: {
         if (status === PageStatus.Deactivating) {
             ss.resetSize()
+            var temp = currentIndex
             ss.model = null
+
+            ss.currentIndex = temp
         }
 
-        if (status === PageStatus.Activating)
+        if (status === PageStatus.Activating) {
             ss.model = taivas.havainnot.get(taivas.havainto).photos
+            ss.currentIndex = currentIndex
+        }
     }
 
 }

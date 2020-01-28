@@ -75,7 +75,7 @@ Page {
                     property string category: "landscape"
                     text: "Näytä vaakatasossa (landscape)"
                     description: "Valitse näytetäänkö kuvat vaaka- vai pystytasossa (landscape/portrait). "
-                                + "Asetus toimii ilman, että Tallenus-kohta on päällä."
+                                + "Asetus toimii ilman, että Tallennus-kohta on päällä."
                 }
             }
 

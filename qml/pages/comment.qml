@@ -5,6 +5,7 @@ Page {
     id: page
 
     function setResponse(message) {
+        // Show error code in label
         errmsg.enabled = true
         errmsg.text = message
     }
@@ -40,7 +41,7 @@ Page {
             xhr.onreadystatechange = function() {
 
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    // successs
+                    // success
                     setResponse("Kommentti lähetettiin onnistuneesti")
                     clearFields()
                 } else {
@@ -90,11 +91,8 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
-                text: "Muista täyttää kaikki kentät ja antaa kelvollinen sähköpostiosoite."
-                    + "Otathan myös huomioon, että kommentti ei tule saman tien näkyville, sillä "
-                    + "Taivaanvahdin ylläpidon tulee ensiksi hyväksyä se."
-                    + " Jos kommentointi epäonnistuu ja olet varma, ettei tiedoissa ole virheitä, "
-                    + "ilmoita sovelluksen ylläpitäjälle."
+                text: "Täytä kaikki kentät ja anna kelvollinen sähköpostiosoite."
+                    + " Kommentti tulee näkyväksi, kun Taivaanvahdin ylläpito hyväksyy sen."
             }
 
             Label {
@@ -103,7 +101,7 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
-                text: "Nimesi"
+                text: "Nimi"
             }
 
             TextField {
@@ -152,11 +150,6 @@ Page {
 
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false
-            }
-
-            Button {
-                text: "Lähetä"
-                onClicked: leaveComment()
             }
 
             Label {
