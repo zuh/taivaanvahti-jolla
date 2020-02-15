@@ -13,8 +13,8 @@ Name:       harbour-taivaanvahti2
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Taivaanvahti
-Version:    2.0.2
-Release:    2
+Version:    2.0.3
+Release:    1
 Group:      Qt/Qt
 License:    LICENSE
 Source0:    %{name}-%{version}.tar.bz2

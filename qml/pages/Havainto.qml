@@ -34,8 +34,7 @@ Page {
     id: page
 
     property var photoComp: null
-    property var
-    photoPage: null
+    property var photoPage: null
 
     SilicaFlickable {
         id: flick
@@ -239,17 +238,21 @@ Page {
                             onProgressChanged: {
                                 if (progress == 1.0)
                                     photos.loaded++
-                                if (photos.loaded >= photoRepeater.model.count)
+                                if (photos.loaded >= photoRepeater.model.count) {
                                     busyTail.running = false
+                                }
                             }
                         }
 
                         onClicked: {
-                            if (page.photoPage === null)
-                                page.photoPage = Qt.createComponent("Photos.qml").createObject(page)
 
-                            page.photoPage.currentIndex = index
-                            pageStack.push(page.photoPage)
+                            if (!busyTail.running && !busyComments.running && !busy.running) {
+                                if (page.photoPage === null)
+                                    page.photoPage = Qt.createComponent("Photos.qml").createObject(page)
+
+                                page.photoPage.currentIndex = index
+                                pageStack.push(page.photoPage)
+                            }
                         }
                     }
                 }

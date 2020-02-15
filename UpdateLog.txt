@@ -1,12 +1,16 @@
+Taivaanvahti 2.0.3
 
-2.0.2
+-Muutokset
+        * Korjattu pienehkö bugi, kun  havainnon kuvia klikataan ennen kuin havainnon muut tiedot
+          on ladattu. Bugista aiheutui siis se, että havainto saattoi jäädä keskeneräiseksi.
+
+Taivaanvahti 2.0.2
 
 -Muutokset
         * Kommentointi ominaisuus havainnoille
         * Mahdollisuus havainnon yhteydessä kytkeä vaaka tai pystykuvat
-        * Kuvien skaalausta parannettu
 
-2.0.1
+Taivaanvahti 2.0.1
 
 - Muutokset
         * Paranneltu havaintokuvien skaalausta ja näkymää
