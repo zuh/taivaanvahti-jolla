@@ -123,8 +123,12 @@ Page {
                 Label {
                     text: {
                         var txt = Format.formatDate(start, Formatter.TimeValue)
-                        var elapsed = Format.formatDate(start, Formatter.DateMedium)
-                        return txt + " - " + elapsed + " - " + city
+                        var time = new Date(start)
+                        var month = time.getMonth()+1
+                        var date = time.getDate()
+                        var year = time.getFullYear()
+
+                        return txt + " - " + date + "." + month + "." + year + " - " + city
                     }
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor

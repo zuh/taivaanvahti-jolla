@@ -81,8 +81,12 @@ Page {
                     return ""
 
                 var txt = Format.formatDate(taivas.havainnot.get(taivas.havainto).start, Formatter.TimeValue)
-                var elapsed = Format.formatDate(taivas.havainnot.get(taivas.havainto).start, Formatter.DateLong)
-                return txt + " | " + elapsed
+                var time = new Date(taivas.havainnot.get(taivas.havainto).start)
+                var month = time.getMonth()+1
+                var date = time.getDate()
+                var year = time.getFullYear()
+
+                return txt + " | " + date + "." + month + "." + year
             }
 
             BusyIndicator {
@@ -312,25 +316,30 @@ Page {
                     delegate: Column {
 
                         Label {
-                            font.pixelSize: Theme.fontSizeSmall
-                            truncationMode: TruncationMode.Fade
+                            font.pixelSize: Theme.fontSizeMedium
                             text: user
                         }
                         Label {
-                            font.pixelSize: Theme.fontSizeTiny
+                            font.pixelSize: Theme.fontSizeSmall
                             color: Theme.secondaryColor
                             text: {
+                                var txt = Format.formatDate(taivas.havainnot.get(taivas.havainto).start, Formatter.TimeValue)
+                                var time = new Date(taivas.havainnot.get(taivas.havainto).start)
+                                var month = time.getMonth()+1
+                                var date = time.getDate()
+                                var year = time.getFullYear()
 
-                                var txt = Format.formatDate(start, Formatter.TimeValue)
-                                var elapsed = Format.formatDate(start, Formatter.DateLong)
-                                return txt + " | " + elapsed
+                                return txt + " | " + date + "." + month + "." + year
                             }
                         }
+
                         Label {
                             width: col.width
                             wrapMode: Text.WordWrap
                             maximumLineCount: 1024
                             text: model.text
+                            truncationMode: TruncationMode.Fade
+                            font.pixelSize: Theme.fontSizeSmall
                         }
                     }
                 }
@@ -342,12 +351,11 @@ Page {
                     visible: running
                     running: taivas.commentSearchRunning
                 }
-
             }
 
             Column {
                 width: parent.width
-                spacing: Theme.paddingSmall
+                spacing: Theme.paddingMedium
 
                 Label {
                     anchors.left: parent.left
