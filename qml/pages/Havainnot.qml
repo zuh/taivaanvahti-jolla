@@ -75,7 +75,7 @@ Page {
             MenuItem {
                 text: "Päivitä"
                 onClicked: {
-                    pulley.close(false)
+                    pulley.close()
                     taivas.havainnot.clear()
                     taivas.havaitse()
                 }

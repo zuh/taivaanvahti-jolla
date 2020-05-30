@@ -91,9 +91,9 @@ Page {
 
             BusyIndicator {
                 id: busy
-                anchors.centerIn: parent
                 visible: running
                 running: taivas.detailedSearchRunning
+                anchors.centerIn: parent
             }
         }
 
@@ -291,6 +291,7 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
+                font.pixelSize: Theme.fontSizeSmall
                 text: taivas.havainnot.get(taivas.havainto).equipment || ""
             }
 

@@ -49,12 +49,19 @@ Page {
         z: 1
     }
 
+    BusyIndicator {
+        id: busy
+        anchors.centerIn: parent
+        size: BusyIndicatorSize.Large
+        visible: running
+        running: true
+    }
+
     SlideshowView {
         id: ss
         anchors.fill: parent
 
         model: taivas.havainnot.get(taivas.havainto).photos
-
 
         delegate: Image {
             id: photo
@@ -127,15 +134,6 @@ Page {
                     scaled = true
                     drag.target = null
                 }
-            }
-
-            BusyIndicator {
-                id: busy
-                width: Theme.itemSizeLarge
-                height: Theme.itemSizeLarge
-                anchors.centerIn: parent
-                visible: running
-                running: true
             }
 
             MouseArea {

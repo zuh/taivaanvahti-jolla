@@ -5,6 +5,7 @@ Taivaanvahti 2.0.3
           on ladattu. Bugista aiheutui siis se, että havainto saattoi jäädä keskeneräiseksi.
         * Lisätty virheenkäsittely tilanteeseen, jossa api-haku ei toimi ollenkaan
         * Pieniä tekstimuutoksia / korjauksia
+        * Uusi formatointi päivämäärille, pitäisi olla selkeämät nyt
 
 Taivaanvahti 2.0.2
 
