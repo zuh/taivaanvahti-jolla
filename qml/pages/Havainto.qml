@@ -79,7 +79,10 @@ Page {
             title: {
                 if (busy.running)
                     return ""
-                return taivas.havainnot.get(taivas.havainto).start || ""
+
+                var txt = Format.formatDate(taivas.havainnot.get(taivas.havainto).start, Formatter.TimeValue)
+                var elapsed = Format.formatDate(taivas.havainnot.get(taivas.havainto).start, Formatter.DateLong)
+                return txt + " | " + elapsed
             }
 
             BusyIndicator {
@@ -139,7 +142,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: {
@@ -184,7 +187,7 @@ Page {
                     Label {
                         anchors.left: parent.left
                         width: parent.width
-                        font.pixelSize: Theme.fontSizeSmall
+                        font.pixelSize: Theme.fontSizeMedium
                         color: Theme.highlightColor
                         font.family: Theme.fontFamilyHeading
                         horizontalAlignment: Text.AlignLeft
@@ -269,7 +272,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: {
@@ -289,7 +292,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: {
@@ -307,14 +310,21 @@ Page {
                 Repeater {
                     model: taivas.kommentit
                     delegate: Column {
+
                         Label {
                             font.pixelSize: Theme.fontSizeSmall
+                            truncationMode: TruncationMode.Fade
                             text: user
                         }
                         Label {
                             font.pixelSize: Theme.fontSizeTiny
                             color: Theme.secondaryColor
-                            text: start
+                            text: {
+
+                                var txt = Format.formatDate(start, Formatter.TimeValue)
+                                var elapsed = Format.formatDate(start, Formatter.DateLong)
+                                return txt + " | " + elapsed
+                            }
                         }
                         Label {
                             width: col.width
@@ -341,7 +351,7 @@ Page {
 
                 Label {
                     anchors.left: parent.left
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeMedium
                     color: Theme.highlightColor
                     font.family: Theme.fontFamilyHeading
                     horizontalAlignment: Text.AlignLeft

@@ -121,7 +121,11 @@ Page {
                     elide: Text.ElideRight
                 }
                 Label {
-                    text: start + " - " + city
+                    text: {
+                        var txt = Format.formatDate(start, Formatter.TimeValue)
+                        var elapsed = Format.formatDate(start, Formatter.DateMedium)
+                        return txt + " - " + elapsed + " - " + city
+                    }
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor
                     elide: Text.ElideRight
