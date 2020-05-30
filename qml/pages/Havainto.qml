@@ -138,11 +138,11 @@ Page {
 
             Label {
                 width: parent.width
+                font.pixelSize: Theme.fontSizeSmall
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
                 text: taivas.havainnot.get(taivas.havainto).description || ""
             }
-
 
             Label {
                 anchors.left: parent.left
