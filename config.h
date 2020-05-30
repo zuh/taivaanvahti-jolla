@@ -123,7 +123,6 @@ private:
     QString searchCity_ = "";
     QString start = "";
     QString end = "";
-
 };
 
 #endif // CONFIG_H

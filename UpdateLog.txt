@@ -3,6 +3,8 @@ Taivaanvahti 2.0.3
 -Muutokset
         * Korjattu pienehkö bugi, kun  havainnon kuvia klikataan ennen kuin havainnon muut tiedot
           on ladattu. Bugista aiheutui siis se, että havainto saattoi jäädä keskeneräiseksi.
+        * Lisätty virheenkäsittely tilanteeseen, jossa api-haku ei toimi ollenkaan
+        * Pieniä tekstimuutoksia / korjauksia
 
 Taivaanvahti 2.0.2
 

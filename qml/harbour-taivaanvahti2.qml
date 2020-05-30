@@ -46,11 +46,18 @@ ApplicationWindow
     initialPage: Qt.createComponent("pages/Havainnot.qml")
     cover: Qt.createComponent("cover/CoverPage.qml")
 
+    // Error flags
+    property bool commentError: false // couldn't fetch comments
+    property bool fetchError: false // couldn't fetch observations
+    property bool observationError: false // couldn't fetch observation data
+
+    // general data structures
     property int havainto: 0
     property var havainnot: ListModel {}
     property var kommentit: ListModel {}
     property var viimeiset: ListModel {}
 
+    // Config related parameters
     property bool configurable: false
     property bool configured: false
     property bool landscape: true
@@ -58,21 +65,25 @@ ApplicationWindow
     property bool detailedSearchRunning: false
     property bool commentSearchRunning: false
 
+    // Search parameters
     property string searchCity: ""
     property string configurequery: ""
     property string userName: ""
     property string copyright: "© 2020 "
     property string searchUser: ""
 
+    // URLS
     property string searchUrl: "https://www.taivaanvahti.fi/app/api/search.php?format=json"
     property string defaultColumns: "&columns=id,title,start,city,category,thumbnails,comments"
     property string detailedColumns: "&columns=user,team,description,details,link,equipment,images"
     property string commentUrl: "https://www.taivaanvahti.fi/app/api/comment_search.php?format=json"
 
+    // Date related parameters
     property int dateOffset: 7
     property var startDate: makeOffsetDate()
     property var endDate: new Date()
 
+    // Category and parameters
     property string searchObserver: ""
     property string searchTitle: ""
     property var searchCategories: {
@@ -86,6 +97,8 @@ ApplicationWindow
         "halo": false,
         "muu": false
     }
+
+    // JavaScript functions start
 
     function resetDates() {
         config.resetDate()
@@ -197,13 +210,18 @@ ApplicationWindow
     }
 
     function havaitseTarkemmin() {
+
+        if (observationError) {
+            observationError = false
+        }
+
         detailedSearchRunning = true
         var xhr = new XMLHttpRequest
         var query = searchUrl + searchUser + detailedColumns + "&id=" + havainnot.get(havainto).id
         xhr.open("GET", query);
 
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 userName = ""
                 detailedSearchRunning = false
                 if (xhr.responseText.match("^No") !== null)
@@ -221,12 +239,17 @@ ApplicationWindow
                 }
 
                 havainnot.set(havainto, results.observation[0])
-            } // TODO: handle errors
+            }
         }
         xhr.send();
     }
 
     function havaitse() {
+
+        if (fetchError) {
+            fetchError = false
+        }
+
         searchRunning = true
         havainnot.clear()
         viimeiset.clear()
@@ -237,7 +260,7 @@ ApplicationWindow
         query += "&end=" + Qt.formatDate(endDate, "yyyy-MM-dd")
         xhr.open("GET", query);
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
 
                 searchRunning = false
                 if (xhr.responseText.match("^No") !== null)
@@ -265,12 +288,21 @@ ApplicationWindow
                                          "category": havainnot.get(1).title, // instead title
                                          "start": havainnot.get(1).start
                                      })
-            } // TODO: handle errors
+            }
+
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
+                fetchError = true
+            }
         }
         xhr.send();
     }
 
     function kommentoi() {
+
+        if (commentError) {
+            commentError = false
+        }
+
         kommentit.clear()
         if (havainnot.get(havainto).comments && havainnot.get(havainto).comments === "0")
             return
@@ -278,7 +310,7 @@ ApplicationWindow
         var xhr = new XMLHttpRequest;
         xhr.open("GET", commentUrl + "&observation=" + havainnot.get(havainto).id)
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 commentSearchRunning = false
                 if (xhr.responseText.match("^No") !== null)
                     return
@@ -286,10 +318,13 @@ ApplicationWindow
                 for (var i in results.comment) {
                     kommentit.append(results.comment[i])
                 }
-            } // TODO: handle errors
+            }
+
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
+                commentError = true
+            }
         }
         xhr.send();
-
     }
 
 }

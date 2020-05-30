@@ -196,6 +196,7 @@ Page {
                                 return ""
                         }
                     }
+
                     Label {
                         anchors.left: parent.left
                         font.pixelSize: Theme.fontSizeTiny
@@ -222,6 +223,7 @@ Page {
                     id: photoRepeater
                     model: taivas.havainnot.get(taivas.havainto).thumbs
                     onModelChanged: {
+
                         if (model.count > 0 && model.count !== photos.loaded)
                             busyTail.running = true
                     }

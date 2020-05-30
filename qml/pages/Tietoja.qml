@@ -42,7 +42,7 @@ Page {
 
         PageHeader {
             id: header
-            title: "Taivaanvahti v. 2.0"
+            title: "Taivaanvahti"
         }
 
         Column {
@@ -69,11 +69,11 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
-                text: "Alkuperäistä Taivaanvahti sovellusta on kehitetty eteenpäin ja "
-                    + "ensinnäkin korjattu yhteensopivaksi Sailfish 3.2 -version kanssa. "
-                    + "Uutena ominaisuutena on hakuparametrien tallennus ja kaupungin "
-                    + "perusteella hakeminen. Sovellukseen on myös tehty pieniä tyylimuutoksia. "
-                    + "Sovellus jouduttiin myös nimeämään Taivaanvahti 2 sekaantumisen vuoksi."
+                text: "Alkuperäistä Taivaanvahti-sovellusta on kehitetty eteenpäin. "
+                      + "Sovelluksella on nyt tuki Sailfish 3 -versiolle ja lisäksi "
+                      + "mukaan on lisätty uusia ominaisuuksia kuten havaintohakujen "
+                      + "tallennus, kaupunkiparametri, valinta kuvien näyttöasennolle ja kommentin lähetys. "
+                      + "Lisäksi on tehty pieniä tyylimuutoksia"
             }
 
             Label {
@@ -133,7 +133,7 @@ Page {
             BackgroundItem {
                 id: homepage
                 height: Theme.itemSizeSmall
-                property string url: "https://github.com/Moppa5/taivaanvahti-jolla"
+                property string url: "https://github.com/Moppa5/taivaanvahti-jolla/"
 
                 Label {
                     anchors.centerIn: parent

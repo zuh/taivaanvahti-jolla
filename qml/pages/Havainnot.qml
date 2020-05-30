@@ -36,6 +36,21 @@ Page {
 
     Component.onCompleted: taivas.configure()
 
+    property string hintMessage: ""
+    property string message: {
+        if (list.count == 0 && !taivas.searchRunning && !taivas.fetchError) {
+            hintMessage = "Vedä alas päivittääksesi tai muuttaaksesi hakuehtoja"
+            return "Ei havaintoja"
+        } else if (taivas.fetchError) {
+            hintMessage = "Rajapintahaku on voinut muuttua. Ota yhteyttä kehittäjään"
+            return "Rajapintahaussa tapahtui virhe"
+        } else {
+            hintMessage = ""
+            return ""
+        }
+
+    }
+
     SilicaListView {
         id: list
         anchors.fill: parent
@@ -73,9 +88,9 @@ Page {
         }
 
         ViewPlaceholder {
-            enabled: list.count == 0 && !taivas.searchRunning
-            text: "Ei havaintoja"
-            hintText: "Vedä alas päivittääksesi tai muuttaaksesi hakuehtoja"
+            enabled: true
+            text: message
+            hintText: hintMessage
         }
 
         model: taivas.havainnot
