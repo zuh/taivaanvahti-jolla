@@ -58,7 +58,7 @@ Page {
             Label {
                 id: sovellusotsikko
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Uudesta versiosta"
@@ -69,6 +69,7 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
+                font.pixelSize: Theme.fontSizeSmall
                 text: "Alkuperäistä Taivaanvahti-sovellusta on kehitetty eteenpäin. "
                       + "Sovelluksella on nyt tuki Sailfish 3 -versiolle ja lisäksi "
                       + "mukaan on lisätty uusia ominaisuuksia kuten havaintohakujen "
@@ -79,7 +80,7 @@ Page {
             Label {
                 id: tv
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Taivaanvahdista"
@@ -90,6 +91,7 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
+                font.pixelSize: Theme.fontSizeSmall
                 text: "Taivaanvahti (taivaanvahti.fi) on Ursan havaintojärjestelmä, jonka tietokantaan "
                     + "kerätään tähtitieteellisten ja ilmakehän ilmiöiden havaintoja."
             }
@@ -98,15 +100,16 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
+                font.pixelSize: Theme.fontSizeSmall
                 text: "Tämä sovellus ei ole virallinen osa Taivaanvahtijärjestelmää, "
                     + "mutta se on kehitetty Taivaanvahdin ylläpidon avulla. Tähän sovellukseen "
-                    + "liittyvät kysymykset / ongelmat voi lähettää GitHub-palveluun (katso linkki alempaa). "
+                    + "liittyvät ongelmat tai ehdotukset voi laittaa GitHub-palveluun issue-pyyntöinä. "
                     + "Palaute on sallittua ja toivottua"
             }
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Tekijänoikeuksista"
@@ -116,6 +119,7 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
+                font.pixelSize: Theme.fontSizeSmall
                 text: "Havaintojen kuvien ja tekstien tekijänoikeudet säilyvät havaitsijalla. "
                     + "Lähettäessään havainnon Taivaanvahtiin tekijä luovuttaa vain oikeuden "
                     + "julkaista kuvat ja teksti havaintojärjestelmässä. Tämän vuoksi kuvia ei "
@@ -124,7 +128,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Kotisivu"
@@ -146,7 +150,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Alkuperäinen kehittäjä"
@@ -170,7 +174,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Nykyinen kehittäjä"

@@ -60,7 +60,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Havaintokuvat"
@@ -81,7 +81,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Tallennus"
@@ -117,7 +117,7 @@ Page {
 
                 Label {
                     anchors.left: parent.left
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeMedium
                     color: Theme.highlightColor
                     font.family: Theme.fontFamilyHeading
                     text: "Aikaväli"
@@ -198,7 +198,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Kategoria"
@@ -295,7 +295,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Kaupunki"
@@ -305,6 +305,7 @@ Page {
                 id: city
                 width: parent.width
                 focus: false
+                font.pixelSize: Theme.fontSizeSmall
                 placeholderText: "Mikä Tahansa"
 
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
@@ -313,7 +314,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Havainnon tekijä"
@@ -323,6 +324,7 @@ Page {
                 id: observer
                 width: parent.width
                 focus: false
+                font.pixelSize: Theme.fontSizeSmall
                 placeholderText: "Kuka Tahansa"
 
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
@@ -331,7 +333,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Havainnon otsikko"
@@ -341,6 +343,7 @@ Page {
                 id: title
                 width: parent.width
                 focus: false
+                font.pixelSize: Theme.fontSizeSmall
                 placeholderText: "Mikä Tahansa"
 
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
@@ -350,6 +353,8 @@ Page {
     }
 
     Component.onCompleted: {
+        // Load the config related data if it exists
+
         for (var i = 0; i < category.children.length; i++) {
             var child = category.children[i]
             child.checked = taivas.searchCategories[child.category]
@@ -373,6 +378,8 @@ Page {
 
         taivas.searchUser = ""
         taivas.searchCategories["all"] = all.checked
+
+        // If config is enabled, write the options
 
         if (!all.checked) {
             for (var i = 1; i < category.children.length; i++) {
@@ -418,8 +425,7 @@ Page {
         if (landscapemode.checked) {
             taivas.setLandScape(true)
             taivas.landscape = true
-        }
-        else {
+        } else {
             taivas.setLandScape(false)
             taivas.landscape = false
         }

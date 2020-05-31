@@ -4,10 +4,16 @@ import Sailfish.Silica 1.0
 Page {
     id: page
 
-    function setResponse(message) {
+    function setResponse(message, success) {
         // Show error code in label
         errmsg.enabled = true
         errmsg.text = message
+
+        if (success) {
+            errmsg.color = Theme.highlightColor
+        } else {
+            errmsg.color = Theme.errorColor
+        }
     }
 
     function clearFields() {
@@ -21,7 +27,7 @@ Page {
         if (namefield.text === "" || emailfield.text === ""
                 || commentarea.text === "") {
             setResponse("Täytä kaikki kentät")
-        } else if (emailfield.text.indexOf("@")==-1) {
+        } else if (emailfield.text.indexOf("@")===-1) {
             setResponse("Sähköpostiosoite ei ole kelvollinen")
         } else {
             var xhr = new XMLHttpRequest
@@ -42,7 +48,7 @@ Page {
 
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     // success
-                    setResponse("Kommentti lähetettiin onnistuneesti")
+                    setResponse("Kommentti lähetettiin onnistuneesti", true)
                     clearFields()
                 } else {
                     setResponse("Kommentointi ei onnistunut, tarkista tiedot tai ilmoita
@@ -90,15 +96,25 @@ Page {
                 id: sovellus
                 width: parent.width
                 wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeSmall
                 maximumLineCount: 1024
                 text: "Täytä kaikki kentät ja anna kelvollinen sähköpostiosoite."
                     + " Kommentti tulee näkyväksi, kun Taivaanvahdin ylläpito hyväksyy sen."
             }
 
             Label {
+                id: errmsg
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.errorColor
+                font.family: Theme.fontFamilyHeading
+                enabled: false
+                text: ""
+            }
+
+            Label {
                 id: name
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Nimi"
@@ -108,6 +124,7 @@ Page {
                 id: namefield
                 width: parent.width
                 focus: false
+                font.pixelSize: Theme.fontSizeSmall
                 placeholderText: "Koko nimesi"
 
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
@@ -117,7 +134,7 @@ Page {
             Label {
                 id: email
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Sähköposti"
@@ -127,6 +144,7 @@ Page {
                 id: emailfield
                 width: parent.width
                 focus: false
+                font.pixelSize: Theme.fontSizeSmall
                 placeholderText: "Sähköpostisi"
 
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
@@ -136,7 +154,7 @@ Page {
             Label {
                 id: comment
                 anchors.left: parent.left
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Kommentti"
@@ -146,22 +164,13 @@ Page {
                 id: commentarea
                 width: parent.width
                 focus: false
+                font.pixelSize: Theme.fontSizeSmall
                 placeholderText: "Kommenttisi tähän"
 
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false
             }
-
-            Label {
-                id: errmsg
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
-                font.family: Theme.fontFamilyHeading
-                enabled: false
-                text: ""
-            }
         }
-
     }
 }
 

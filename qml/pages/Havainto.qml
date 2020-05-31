@@ -324,8 +324,8 @@ Page {
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.secondaryColor
                             text: {
-                                var txt = Format.formatDate(taivas.havainnot.get(taivas.havainto).start, Formatter.TimeValue)
-                                var time = new Date(taivas.havainnot.get(taivas.havainto).start)
+                                var txt = Format.formatDate(start, Formatter.TimeValue)
+                                var time = new Date(start)
                                 var month = time.getMonth()+1
                                 var date = time.getDate()
                                 var year = time.getFullYear()
