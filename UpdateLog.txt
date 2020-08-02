@@ -1,0 +1,46 @@
+Taivaanvahti 2.0.3
+
+-Muutokset
+        * Korjattu pienehkö bugi, kun  havainnon kuvia klikataan ennen kuin havainnon muut tiedot
+          on ladattu. Bugista aiheutui siis se, että havainto saattoi jäädä keskeneräiseksi.
+        * Lisätty virheenkäsittely tilanteeseen, jossa api-haku ei toimi ollenkaan
+        * Pieniä tekstimuutoksia / korjauksia
+        * Uusi formatointi päivämäärille, pitäisi olla selkeämät nyt
+
+Taivaanvahti 2.0.2
+
+-Muutokset
+        * Kommentointi ominaisuus havainnoille
+        * Mahdollisuus havainnon yhteydessä kytkeä vaaka tai pystykuvat
+
+Taivaanvahti 2.0.1
+
+- Muutokset
+        * Paranneltu havaintokuvien skaalausta ja näkymää
+        * SlideShowView havaintokuvat voi nyt näyttää kerrallaan joko landscape tai portrait moodissa
+        * Lisätty asetus, jolla käyttäjä voi vaihtaa tilan joko suosimaan landscape tai portait
+        * Vaihdettu "Hakuehdot" => "Asetukset" Pulley Menussa
+        * Koodia dokumentoitu paremmin
+
+Taivaanvahti 2.0
+
+- Lisäosana / uutena
+	* Havaintojen hakuparametrit/aikajakso tallennetaan käyttökertojen välissä ja ominaisuus on 
+	  kytkettävissä päälle / pois
+	* Kaupunki hakuparametri
+	* Havaintonäkymässä näytetään nyt myös havainnon kategoria
+
+- Korjattu yhteensopivaksi Sailfish 3.2 kanssa
+	* Rajapintapyynnöt ja käsittely korjattu, joten havainnot näkyvät taas
+	* Korjattu kommentti ja kuvamäärien aiheuttama kaatuminen havaintonäkymässä (model delegate -ongelma)
+	* Korjattu oletushaun palautus
+	* Poistettu komeetta-hakuparametri, koska rajapinta ei enää tarjoa sitä
+
+- Tyyli- ja muut muutokset
+	* Joitakin tekstejä on muokattu ja selkeytetty yhteensopivaksi nykyisen version kanssa
+	* Tietoa-osioon lisätty tiedot nykyisestä sovelluksesta ja sen tilasta, sillä kehitys on muuttunut
+	* Pulley Menun järjestys selkeämpi, ensiksi hakuihin liittyvät asiat ja sitten Tietoa-osio
+	* Muut tekstit kuin PageHeaderit on nyt tasattu vasempaan reunaan 
+	* Cover-sivulla näkyy nyt kategorian sijaan havainnon otsikko
+	* Tietoa-osioon lisätty vakio aikavälin palautus- ja hakutekstikenttien tyhjennysnappi. Lisäksi jo
+	  ylempänä mainittu konfiguraatiotäppä päälle / pois

@@ -27,14 +27,21 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
     id: page
-    property alias currentIndex: ss.currentIndex
+    property int currentIndex: 0
+    property real portraitScale: 2.0
+    property real landscapeScale: 1.75
 
-    allowedOrientations: Orientation.All
+    allowedOrientations: {
+        if (taivas.landscape)
+            return Orientation.Landscape
+        else
+            return Orientation.Portrait
+    }
 
     PageHeader {
         id: header
@@ -42,10 +49,16 @@ Page {
         z: 1
     }
 
+    BusyIndicator {
+        id: busy
+        anchors.centerIn: parent
+        size: BusyIndicatorSize.Large
+        visible: running
+        running: true
+    }
+
     SlideshowView {
-
         id: ss
-
         anchors.fill: parent
 
         model: taivas.havainnot.get(taivas.havainto).photos
@@ -61,6 +74,7 @@ Page {
             smooth: false
             property bool scaled: true
 
+
             onStatusChanged: {
                 if (status != Image.Ready)
                     return
@@ -72,62 +86,83 @@ Page {
                 if (scaled)
                      header.title = "Sovitettu koko"
                 else
-                     header.title = "Alkuperäinen koko"
+                     header.title = "Zoomattu koko"
             }
 
             function initialSize() {
-                if (width >= sourceSize.width && height >= sourceSize.height) {
+
+                /* if (width >= sourceSize.width && height >= sourceSize.height) {
                     width = sourceSize.width
                     height = sourceSize.height
                     scaled = false
-                    panner.enabled = false
+                    panner.enabled = true
                 }
 
                 if (width > ss.width || height > ss.height) {
                     width = ss.width
                     height = ss.height
                     scaled = true
-                }
+                } */
+
+                width = ss.width
+                height = ss.height
+                panner.enabled = true
+                scaled = true
+                drag.target = null
             }
 
-            function toggleSize() {
-                if (width > ss.width || height > ss.height) {
+            function toggleSize(check) {
+                if ((width > ss.width || height > ss.height ||
+                        width >= 1.5*sourceSize.width ||
+                        height >= 1.5*sourceSize.height) && scaled !== true) {
                     width = ss.width
                     height = ss.height
                     scaled = true
                 } else {
-                    width = sourceSize.width
-                    height = sourceSize.height
+
+                    if (isPortrait) {
+                        width = portraitScale*width
+                        height = portraitScale*height
+                    } else {
+                        width = landscapeScale*width
+                        height = landscapeScale*height
+                    }
                     scaled = false
                 }
-            }
 
-            BusyIndicator {
-                id: busy
-                width: Theme.itemSizeLarge
-                height: Theme.itemSizeLarge
-                anchors.centerIn: parent
-                visible: running
-                running: true
+                if (check) {
+                    scaled = true
+                    drag.target = null
+                }
             }
 
             MouseArea {
                 id: panner
                 anchors.fill: parent
                 enabled: true
+                hoverEnabled: true
+                drag.maximumX: width / 4
+                drag.maximumY: height / 4
+
                 onClicked: {
-                    photo.toggleSize()
-                    if (photo.scaled)
+                    photo.toggleSize(false)
+
+                    if (photo.scaled) {
                         drag.target = null
-                    else
+                    } else {
                         drag.target = photo
+                    }
                 }
             }
-
         }
 
         function resetSize() {
             currentItem.initialSize()
+        }
+
+        function reset() {
+            currentItem.initialSize()
+            currentItem.toggleSize(true)
         }
     }
 
@@ -140,14 +175,25 @@ Page {
         font.family: Theme.fontFamilyHeading
         text: {
             if (taivas.havainnot.get(taivas.havainto).thumbs && taivas.havainnot.get(taivas.havainto).thumbs.count)
-                return "© 2013 " + taivas.havainnot.get(taivas.havainto).user
+                return taivas.copyright + taivas.userName
             else
                 return ""
         }
     }
 
     onStatusChanged: {
-        if (status === PageStatus.Deactivating)
+        if (status === PageStatus.Deactivating) {
             ss.resetSize()
+            var temp = currentIndex
+            ss.model = null
+
+            ss.currentIndex = temp
+        }
+
+        if (status === PageStatus.Activating) {
+            ss.model = taivas.havainnot.get(taivas.havainto).photos
+            ss.currentIndex = currentIndex
+        }
     }
+
 }

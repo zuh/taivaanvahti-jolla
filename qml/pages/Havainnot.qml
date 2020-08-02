@@ -27,14 +27,29 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 
 Page {
     id: havainnotPage
 
-    Component.onCompleted: taivas.havaitse()
+    Component.onCompleted: taivas.configure()
+
+    property string hintMessage: ""
+    property string message: {
+        if (list.count == 0 && !taivas.searchRunning && !taivas.fetchError) {
+            hintMessage = "Vedä alas päivittääksesi tai muuttaaksesi hakuehtoja"
+            return "Ei havaintoja"
+        } else if (taivas.fetchError) {
+            hintMessage = "Rajapintahaku on voinut muuttua. Ota yhteyttä kehittäjään"
+            return "Rajapintahaussa tapahtui virhe"
+        } else {
+            hintMessage = ""
+            return ""
+        }
+
+    }
 
     SilicaListView {
         id: list
@@ -48,19 +63,19 @@ Page {
             busy: taivas.searchRunning
 
             MenuItem {
-                text: "Hakuehdot"
-                onClicked: pageStack.push("Haku.qml")
-            }
-
-            MenuItem {
                 text: "Tietoja"
                 onClicked: pageStack.push("Tietoja.qml")
             }
 
             MenuItem {
+                text: "Asetukset"
+                onClicked: pageStack.push("Haku.qml")
+            }
+
+            MenuItem {
                 text: "Päivitä"
                 onClicked: {
-                    pulley.close(false)
+                    pulley.close()
                     taivas.havainnot.clear()
                     taivas.havaitse()
                 }
@@ -68,20 +83,21 @@ Page {
         }
 
         header: PageHeader {
+            id: header
             title: "Havainnot"
         }
 
         ViewPlaceholder {
-            enabled: list.count == 0 && !taivas.searchRunning
-            text: "Ei havaintoja"
-            hintText: "Vedä alas päivittääksesi tai muuttaaksesi hakuehtoja"
+            enabled: true
+            text: message
+            hintText: hintMessage
         }
 
         model: taivas.havainnot
 
         delegate: BackgroundItem {
 
-            height: Theme.itemSizeLarge
+            height: Theme.itemSizeExtraLarge // Standard was large
 
             Column {
                 id: h
@@ -96,37 +112,59 @@ Page {
                     font.pixelSize: Theme.fontSizeSmall
                     elide: Text.ElideRight
                 }
+
                 Label {
-                    text: start + " - " + city
+                    width: parent.width
+                    text: category
+                    font.pixelSize: Theme.fontSizeTiny
+                    color: Theme.secondaryColor
+                    elide: Text.ElideRight
+                }
+                Label {
+                    text: {
+                        var txt = Format.formatDate(start, Formatter.TimeValue)
+                        var time = new Date(start)
+                        var month = time.getMonth()+1
+                        var date = time.getDate()
+                        var year = time.getFullYear()
+
+                        return txt + " - " + date + "." + month + "." + year + " - " + city
+                    }
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor
                     elide: Text.ElideRight
                     width: parent.width
                 }
+
                 Label {
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor
                     text: {
-                        var ret = ""
-                        if (!taivas.havainnot.get(index))
-                            return ret;
+                        var total = ""
 
-                        if (taivas.havainnot.get(index).thumbs && taivas.havainnot.get(index).thumbs.count)
-                            if (taivas.havainnot.get(index).thumbs.count == 1)
-                                ret += taivas.havainnot.get(index).thumbs.count + " kuva "
-                            else
-                                ret += taivas.havainnot.get(index).thumbs.count + " kuvaa "
+                        if (thumbnails.count === 0 && comments == "0") {
+                            return "Ei kuvia / kommentteja"
+                        } else {
+                            if (thumbnails.count !== 0) {
+                                if (thumbnails.count > 1) {
+                                    total += thumbnails.count + " kuvaa "
+                                } else {
+                                    total += thumbnails.count + " kuva "
+                                }
+                            }
 
-                        if (taivas.havainnot.get(index).comments && taivas.havainnot.get(index).comments != "0")
-                            if (taivas.havainnot.get(index).comments == "1")
-                                ret += taivas.havainnot.get(index).comments + " kommentti"
-                            else
-                                ret += taivas.havainnot.get(index).comments + " kommenttia"
-
-                        return ret
+                            if (comments !== "0") {
+                                if (comments === "1") {
+                                    total += comments + " kommentti "
+                                } else {
+                                    total += comments + " kommenttia "
+                                }
+                            }
+                        return total
                     }
                 }
             }
+        }
 
             onClicked: {
                 taivas.havainto = index

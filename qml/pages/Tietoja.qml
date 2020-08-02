@@ -27,7 +27,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
@@ -36,7 +36,6 @@ Page {
     SilicaFlickable {
         id: flick
         anchors.fill: parent
-
         contentHeight: header.height + col.height + Theme.paddingLarge
 
         ScrollDecorator { flickable: flick }
@@ -56,18 +55,35 @@ Page {
             anchors.right: parent.right
             anchors.rightMargin: Theme.paddingLarge
 
-            BackgroundItem {
+            Label {
+                id: sovellusotsikko
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeMedium
+                color: Theme.highlightColor
+                font.family: Theme.fontFamilyHeading
+                text: "Uudesta versiosta"
+            }
+
+            Label {
+                id: sovellus
+                width: parent.width
+                wrapMode: Text.WordWrap
+                maximumLineCount: 1024
+                font.pixelSize: Theme.fontSizeSmall
+                text: "Alkuperäistä Taivaanvahti-sovellusta on kehitetty eteenpäin. "
+                      + "Sovelluksella on nyt tuki Sailfish 3 -versiolle ja lisäksi "
+                      + "mukaan on lisätty uusia ominaisuuksia kuten havaintohakujen "
+                      + "tallennus, kaupunkiparametri, valinta kuvien näyttöasennolle ja kommentin lähetys. "
+                      + "Lisäksi on tehty pieniä tyylimuutoksia"
+            }
+
+            Label {
                 id: tv
-                height: Theme.itemSizeSmall
-                property string url: "http://www.taivaanvahti.fi"
-
-                Label {
-                    anchors.centerIn: parent
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: tv.url
-                }
-
-                onClicked: Qt.openUrlExternally(url)
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeMedium
+                color: Theme.highlightColor
+                font.family: Theme.fontFamilyHeading
+                text: "Taivaanvahdista"
             }
 
             Label {
@@ -75,7 +91,8 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
-                text: "Taivaanvahti on Ursan havaintojärjestelmä, jonka tietokantaan "
+                font.pixelSize: Theme.fontSizeSmall
+                text: "Taivaanvahti (taivaanvahti.fi) on Ursan havaintojärjestelmä, jonka tietokantaan "
                     + "kerätään tähtitieteellisten ja ilmakehän ilmiöiden havaintoja."
             }
 
@@ -83,14 +100,16 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
+                font.pixelSize: Theme.fontSizeSmall
                 text: "Tämä sovellus ei ole virallinen osa Taivaanvahtijärjestelmää, "
                     + "mutta se on kehitetty Taivaanvahdin ylläpidon avulla. Tähän sovellukseen "
-                    + "liittyvät kysymykset voi lähettää kehittäjille (kts. sivun loppu)"
+                    + "liittyvät ongelmat tai ehdotukset voi laittaa GitHub-palveluun issue-pyyntöinä. "
+                    + "Palaute on sallittua ja toivottua"
             }
 
             Label {
-                anchors.right: parent.right
-                font.pixelSize: Theme.fontSizeSmall
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Tekijänoikeuksista"
@@ -100,6 +119,7 @@ Page {
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1024
+                font.pixelSize: Theme.fontSizeSmall
                 text: "Havaintojen kuvien ja tekstien tekijänoikeudet säilyvät havaitsijalla. "
                     + "Lähettäessään havainnon Taivaanvahtiin tekijä luovuttaa vain oikeuden "
                     + "julkaista kuvat ja teksti havaintojärjestelmässä. Tämän vuoksi kuvia ei "
@@ -107,8 +127,8 @@ Page {
             }
 
             Label {
-                anchors.right: parent.right
-                font.pixelSize: Theme.fontSizeSmall
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
                 text: "Kotisivu"
@@ -117,7 +137,7 @@ Page {
             BackgroundItem {
                 id: homepage
                 height: Theme.itemSizeSmall
-                property string url: "https://github.com/zuh/taivaanvahti-jolla"
+                property string url: "https://github.com/Moppa5/taivaanvahti-jolla/"
 
                 Label {
                     anchors.centerIn: parent
@@ -129,28 +149,50 @@ Page {
             }
 
             Label {
-                anchors.right: parent.right
-                font.pixelSize: Theme.fontSizeSmall
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 font.family: Theme.fontFamilyHeading
-                text: "Kehittäjät"
+                text: "Alkuperäinen kehittäjä"
             }
 
             BackgroundItem {
-                id: kalle
+                id: orgdev
                 height: Theme.itemSizeSmall
-                property string name: "Kalle Vahlman"
-                property string mail: "zuh@iki.fi"
-                property string url: "mailto:" + mail
+                property string original: "Kalle Vahlman"
+                property string originalmail: "zuh@iki.fi"
+                property string originalurl: "mailto:" + originalmail
 
                 Label {
                     anchors.centerIn: parent
                     font.pixelSize: Theme.fontSizeSmall
-                    text: kalle.name + " <" + kalle.mail + ">"
+                    text: orgdev.original + " <" + orgdev.originalmail + ">"
                 }
 
-                onClicked: Qt.openUrlExternally(url)
+                onClicked: Qt.openUrlExternally(originalurl)
             }
+
+            Label {
+                anchors.left: parent.left
+                font.pixelSize: Theme.fontSizeMedium
+                color: Theme.highlightColor
+                font.family: Theme.fontFamilyHeading
+                text: "Nykyinen kehittäjä"
+            }
+
+            BackgroundItem {
+                id: dev
+                height: Theme.itemSizeSmall
+                property string developer: "Santeri Kangas <katso GitHub>"
+
+                Label {
+                    anchors.centerIn: parent
+                    font.pixelSize: Theme.fontSizeSmall
+                    text: dev.developer
+                }
+
+            }
+
         }
     }
 }
